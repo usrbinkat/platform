@@ -19,5 +19,7 @@ Host registry
         IdentityFile {{ artifact_directory }}/.ssh/id_rsa_{{ cluster_domain }}
         Port 22
         StrictHostKeyChecking no
+{% if c1d %}
+{% else %}
         ProxyCommand ssh -W %h:%p bastion
-
+{% endif %}
