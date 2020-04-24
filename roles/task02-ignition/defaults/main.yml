@@ -1,4 +1,8 @@
 ---
+# Target environment
+target_env: {{ lookup('env', 'TARGET_ENV') }}
+
+# OCP4 variables
 artifact_directory: "{{ lookup('env','dirArtifacts') }}"
 base_directory: "{{ lookup('env','dirBase') }}"
 cluster_domain: "{{ lookup('env','clusterDomain') }}"
