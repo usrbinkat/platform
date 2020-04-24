@@ -1,4 +1,7 @@
 ---
+# Target environment
+target_env: "{{ lookup('env', 'TARGET_ENV') }}"
+
 # defaults file for task03-deploy
 artifact_directory: "{{ lookup('env','dirArtifacts') }}"
 base_directory: "{{ lookup('env','dirBase') }}"
@@ -27,7 +30,7 @@ TF_VAR_bootstrap_ign_path: "{{ artifact_directory }}/data/bootstrap.ign"
 
 
 #Terraform variable to deploy 
-tf_base_dir: "{{ lookup('env', 'dirBase') }}/terraform/aws-platform-base"
+tf_base_dir: "{{ lookup('env', 'dirBase') }}/terraform/aws-platform-base/{{ target-env }}"
 
 # Setting vars for future region support
 #ec2_region1: "{{ lookup('env', 'awsRegion1') }}"
