@@ -12,7 +12,7 @@ vpc_name: "{{ lookup('env','nameVpc') }}"
 domain_name: "{{ lookup('env','nameDomain') }}"
 
 
-#Terraform spin-up
+# Terraform spin-up
 TF_VAR_infrastructure_id: "{{ vpc_name }}"
 TF_VAR_aws_region: "{{ ec2_region }}"
 TF_VAR_clustername: "{{ cluster_name }}"
@@ -26,8 +26,12 @@ TF_VAR_master_ign_path: "{{ artifact_directory }}/data/master.ign"
 TF_VAR_bootstrap_ign_path: "{{ artifact_directory }}/data/bootstrap.ign"
 
 
-#Terraform variable to deploy 
+# Terraform variable to deploy 
 tf_base_dir: "{{ lookup('env', 'dirBase') }}/terraform/aws-platform-base/{{ lookup('env', 'TARGET_ENV') }}"
+
+# variables required for CloudOne provided infrastructure
+TF_VAR_private_subnet_names: ["{{vpc_name}}-ApplicationA"]
+TF_VAR_public_subnet_names: ["{{vpc_name}}-DMZA"]
 
 # Setting vars for future region support
 #ec2_region1: "{{ lookup('env', 'awsRegion1') }}"
