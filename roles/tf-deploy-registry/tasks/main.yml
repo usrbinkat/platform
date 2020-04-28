@@ -15,6 +15,16 @@
   no_log: true
 
 - name: ocp4-deploy | tf-deploy-registry | Deploy registry node
+  environment:
+    AWS_ACCESS_KEY_ID: "{{ aws_access_key.stdout }}"
+    AWS_SECRET_ACCESS_KEY: "{{ aws_secret_key.stdout }}"
+    TF_VAR_infrastructure_id: "{{ TF_VAR_infrastructure_id }}"
+    TF_VAR_aws_region: "{{ TF_VAR_aws_region }}"
+    TF_VAR_clustername: "{{ TF_VAR_clustername }}"
+    TF_VAR_domain: "{{ TF_VAR_domain }}"
+    TF_VAR_aws_access_key_id: "{{ TF_VAR_aws_access_key_id }}"
+    TF_VAR_aws_secret_access_key: "{{ TF_VAR_aws_secret_access_key }}"
+    TF_VAR_registry_ssh_public_key_file_path: "{{ TF_VAR_registry_ssh_public_key_file_path }}"
   terraform:
     project_path: "{{ tf_base_dir }}"
     state: present
