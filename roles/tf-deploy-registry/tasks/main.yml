@@ -25,6 +25,8 @@
     TF_VAR_aws_access_key_id: "{{ TF_VAR_aws_access_key_id }}"
     TF_VAR_aws_secret_access_key: "{{ TF_VAR_aws_secret_access_key }}"
     TF_VAR_registry_ssh_public_key_file_path: "{{ TF_VAR_registry_ssh_public_key_file_path }}"
+    # variables required for C1D provided infrastructure
+    TF_VAR_private_subnet_names: "{{ TF_VAR_private_subent_names }}"
   terraform:
     project_path: "{{ tf_base_dir }}"
     state: present
