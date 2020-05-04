@@ -1,4 +1,14 @@
 ---
+- name: ocp4-deploy | task03-deploy | Create docker config directory
+  file:
+    path: "{{ home_directory }}/.docker"
+    state: directory
+
+- name: ocp4-deploy | task03-deploy | Copy credentials to directory
+  copy:
+    src: "{{ artifact_directory }}/.docker/master.json"
+    dest: "{{ home_directory }}/.docker/config.json"
+
 - name: ocp4-deploy | task03-deploy | Download PpenShift images for registry
   block:
     - name: ocp4-deploy | task03-deploy | Check for file existence
