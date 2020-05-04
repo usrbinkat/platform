@@ -23,6 +23,11 @@
         state: absent
       when: files.examined > 0 
 
+    - name: ocp4-deploy | task03-deploy | Create registry mirror directory
+      file:
+        path: "{{ base_directory }}/mirror"
+        state: present
+
     - name: ocp4-deploy | task03-deploy | Create task03-deploy mirror directories
       file:
         path: "{{ item }}"
@@ -48,6 +53,7 @@
     - name: ocp4-deploy | task03-deploy | Create registry mirror directory
       file:
         path: "{{ base_directory }}/mirror"
+        state: present
 
     - name: ocp4-deploy | task03-deploy | Sync content from quay.io
       shell: |
