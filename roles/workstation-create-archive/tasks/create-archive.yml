@@ -44,7 +44,7 @@
     - name: ocp4-deploy | task03-deploy | Create registry mirror directory
       file:
         path: "{{ base_directory }}/mirror"
-        state: present
+        state: directory
 
     - name: ocp4-deploy | task03-deploy | Sync content from quay.io
       shell: |
