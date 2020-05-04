@@ -1,4 +1,4 @@
 ---
 # tasks file for workstation-create-archive
-- name: ocp4-deploy | task03-deploy | registry-pre-init
+- name: ocp4-deploy | workstation | registry-pre-init
   include_tasks: create-archive.yml

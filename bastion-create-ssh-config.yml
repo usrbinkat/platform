@@ -1,0 +1,6 @@
+---
+- name: ocp4-deploy | create ssh config for the bastion host
+  hosts: localhost
+  connection: local
+  roles:
+    - bastion-ssh-config
