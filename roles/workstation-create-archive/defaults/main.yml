@@ -1,0 +1,13 @@
+---
+# defaults file for task03-deploy
+# c1d: false
+artifact_directory: "{{ lookup('env','dirArtifacts') }}"
+base_directory: "{{ lookup('env','dirBase') }}"
+cluster_name: "{{ lookup('env','clusterName') }}"
+cluster_domain: "{{ lookup('env','clusterDomain') }}"
+ec2_region: "{{ lookup('env', 'awsRegion') }}"
+home_directory: "{{ lookup('env','HOME') }}"
+ocp_version: "{{ lookup('env','versOCP') }}"
+remote_home: "{{ ansible_env.HOME }}"
+vpc_name: "{{ lookup('env','nameVpc') }}"
+
