@@ -1,0 +1,6 @@
+---
+# tasks file for bastion init
+
+- name: ocp4-deploy | bastion | Create ssh config
+  include_tasks: bastion-init.yml
+

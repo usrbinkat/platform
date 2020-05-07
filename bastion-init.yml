@@ -1,0 +1,6 @@
+---
+- name: ocp4-deploy | initialize the bastion host
+  hosts: localhost
+  connection: local
+  roles:
+    - bastion-init
