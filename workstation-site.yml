@@ -1,0 +1,7 @@
+---
+# file: workstation-site.yml
+- import_playbook: task-01.yml
+- import_playbook: task-02.yml
+- import_playbook: task-02-ignition.yml
+- import_playbook: workstation-create-archive.yml
+
