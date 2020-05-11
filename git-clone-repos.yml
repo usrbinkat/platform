@@ -1,0 +1,6 @@
+---
+- name: ocp4-deploy | clone git repositories
+  hosts: localhost
+  connection: local
+  roles:
+    - git-clone-repos

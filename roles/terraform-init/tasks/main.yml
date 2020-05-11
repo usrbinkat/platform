@@ -1,0 +1,8 @@
+---
+- name: ocp4-deploy | task02-ignition | Initilize terraform modules
+  shell: "cd {{ item }} && terraform init"
+  with_items:
+    - "{{ base_directory }}/terraform/aws-platform-base/{{ target_env | mandatory }}"
+    - "{{ base_directory }}/terraform/aws-platform-openshift4-registry/{{ target_env | mandatory }}"
+    - "{{ base_directory }}/terraform/aws-platform-openshift4-bootstrap/{{ target_env | mandatory }}"
+    - "{{ base_directory }}/terraform/aws-platform-openshift4-masters/{{ target_env | mandatory }}"

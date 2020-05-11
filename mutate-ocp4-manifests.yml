@@ -1,0 +1,6 @@
+---
+- name: ocp4-deploy | mutate and prepare ocp4 manifests
+  hosts: localhost
+  tasks: 
+  roles:
+    - mutate-ocp4-manifests

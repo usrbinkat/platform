@@ -1,0 +1,4 @@
+---
+# tasks file for task01-init
+- name: ocp4-deploy | generate ocp4 manifests
+  include_tasks: manifests.yml

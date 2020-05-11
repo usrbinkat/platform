@@ -1,7 +1,9 @@
 ---
 # file: workstation-site.yml
-- import_playbook: task-01.yml
-- import_playbook: task-02.yml
-- import_playbook: task-02-ignition.yml
-- import_playbook: workstation-create-archive.yml
+- import_playbook: git-clone-repos.yml
+- import_playbook: terraform-init.yml
+- import_playbook: create-ocp4-manifests.yml
+- import_playbook: mutate-ocp4-manifests.yml
+- import_playbook: generate-ignition-files.yml
+- import_playbook: create-tar-archive.yml
 

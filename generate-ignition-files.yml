@@ -1,0 +1,6 @@
+---
+- name: ocp4-deploy | generate ignition files
+  hosts: localhost
+  tasks: 
+  roles:
+    - generate-ignition-files

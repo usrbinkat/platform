@@ -1,0 +1,6 @@
+---
+- name: ocp4-deploy | initialize terraform workspaces
+  hosts: localhost
+  tasks: 
+  roles:
+    - terraform-init

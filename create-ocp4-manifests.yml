@@ -1,0 +1,6 @@
+---
+- name: ocp4-deploy | create ocp4 manifests
+  hosts: localhost
+  connection: local
+  roles:
+    - create-ocp4-manifests
