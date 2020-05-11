@@ -1,6 +1,6 @@
 ---
 # file: bastion-site.yml
-- import_playbook: tf-vpc.yml
+- import_playbook: tf-base.yml
 - import_playbook: tf-registry.yml
 - import_playbook: bastion-init.yml
 - import_playbook: task-03-registry.yml
