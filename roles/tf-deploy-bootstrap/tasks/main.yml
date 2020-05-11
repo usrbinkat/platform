@@ -1,5 +1,32 @@
 ---
+- name: ocp4-deploy | tf-deploy-registry | Register AWS access key ID
+  shell: "cat ${dirArtifacts}/.aws/govcloud.credentials | grep aws_access_key_id | awk '{print $3}'"
+  register: aws_access_key
+
+- name: ocp4-deploy | tf-deploy-registry | Register AWS secret access key
+  shell: "cat ${dirArtifacts}/.aws/govcloud.credentials | grep aws_secret_access_key | awk '{print $3}'"
+  register: aws_secret_key
+
+- set_fact:
+    AWS_ACCESS_KEY_ID: "{{ aws_access_key.stdout }}"
+    TF_VAR_aws_access_key_id: "{{ aws_access_key.stdout }}"
+    AWS_SECRET_ACCESS_KEY: "{{ aws_secret_key.stdout }}"
+    TF_VAR_aws_secret_access_key: "{{ aws_secret_key.stdout }}"
+  no_log: true
+
 - name: ocp4-deploy | tf-deploy-bootstrap | Deploy bootstrap resources
+  environment:
+    AWS_ACCESS_KEY_ID: "{{ aws_access_key.stdout }}"
+    AWS_SECRET_ACCESS_KEY: "{{ aws_secret_key.stdout }}"
+    TF_VAR_infrastructure_id: "{{ TF_VAR_infrastructure_id }}"
+    TF_VAR_aws_region: "{{ TF_VAR_aws_region }}"
+    TF_VAR_clustername: "{{ TF_VAR_clustername }}"
+    TF_VAR_domain: "{{ TF_VAR_domain }}"
+    TF_VAR_aws_access_key_id: "{{ TF_VAR_aws_access_key_id }}"
+    TF_VAR_aws_secret_access_key: "{{ TF_VAR_aws_secret_access_key }}"
+    TF_VAR_registry_ssh_public_key_file_path: "{{ TF_VAR_registry_ssh_public_key_file_path }}"
+    # variables required for C1D provided infrastructure
+    TF_VAR_private_subnet_names: "{{ TF_VAR_private_subnet_names }}"
   terraform:
     project_path: "{{ tf_base_dir }}"
     state: present
