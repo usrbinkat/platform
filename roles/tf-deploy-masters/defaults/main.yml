@@ -26,7 +26,10 @@ TF_VAR_master_ign_path: "{{ artifact_directory }}/data/master.ign"
 TF_VAR_bootstrap_ign_path: "{{ artifact_directory }}/data/bootstrap.ign"
 
 #Terraform variable to deploy 
-tf_base_dir: "{{ lookup('env', 'dirBase') }}/terraform/aws-platform-openshift4-masters"
+tf_base_dir: "{{ lookup('env', 'dirBase') }}/terraform/aws-platform-openshift4-masters/{{ lookup('env', 'TARGET_ENV') }}"
+
+# variables required for CloudOne provided infrastructure
+TF_VAR_private_subnet_names: "{{vpc_name}}-ApplicationA"
 
 # Setting vars for future region support
 #ec2_region1: "{{ lookup('env', 'awsRegion1') }}"
