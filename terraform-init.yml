@@ -2,5 +2,11 @@
 - name: ocp4-deploy | initialize terraform workspaces
   hosts: localhost
   tasks: 
+  - name: ocp4-deploy | terraform-init | check TARGET_ENV environment variable
+    fail:
+      msg: "Environment variable TARGET_ENV not set"
+    when: target_env | length < 1
   roles:
     - terraform-init
+  vars:
+    target_env: "{{ lookup('env', 'TARGET_ENV') }}"
