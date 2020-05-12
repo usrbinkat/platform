@@ -2,7 +2,7 @@
 - name: ocp4-deploy | clone git repositories
   hosts: localhost
   connection: local
-  tasks:
+  pre_tasks:
   - name: ocp4-deploy | git clone repos | check the environment file has been sourced
     fail:
       msg: |
