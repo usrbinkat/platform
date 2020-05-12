@@ -2,5 +2,20 @@
 - name: ocp4-deploy | Deploy master nodes via terraform
   hosts: localhost
   connection: local
+  pre_tasks:
+  - name: ocp4-deploy | git clone repos | check the environment file has been sourced
+    fail:
+      msg: |
+        The environment file has not been sourced
+        try this
+        source /root/PlatformOne/*/environment
+    when: cluster_domain | length < 1 
+  - name: ocp4-deploy | git clone repos | check TARGET_ENV environment variable
+    fail:
+      msg: "Environment variable TARGET_ENV is not set"
+    when: target_env | length < 1
   roles: 
     - tf-deploy-masters
+  vars:
+    target_env: "{{ lookup('env', 'TARGET_ENV') }}"
+    cluster_domain: "{{ lookup('env', 'clusterDomain') }}"
