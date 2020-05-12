@@ -1,9 +1,8 @@
 ---
 - name: ocp4-deploy | terraform-init | check TARGET_ENV environment variable
-  tasks:
-    - fail:
-        msg: "Variable TARGET_ENV not set"
-      when: target_env | length < 1
+  fail:
+    msg: "Environment variable TARGET_ENV not set"
+  when: target_env | length < 1
 
 - name: ocp4-deploy | task02-ignition | Initilize terraform workspaces
   shell: "cd {{ item }} && terraform init"
