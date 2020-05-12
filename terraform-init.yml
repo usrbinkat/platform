@@ -1,10 +1,10 @@
 ---
 - name: ocp4-deploy | initialize terraform workspaces
   hosts: localhost
-  tasks: 
+  pre_tasks: 
   - name: ocp4-deploy | terraform-init | check TARGET_ENV environment variable
     fail:
-      msg: "Environment variable TARGET_ENV not set"
+      msg: "Environment variable TARGET_ENV is not set"
     when: target_env | length < 1
   roles:
     - terraform-init

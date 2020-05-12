@@ -12,7 +12,7 @@
     when: cluster_domain | length < 1 
   - name: ocp4-deploy | git clone repos | check TARGET_ENV environment variable
     fail:
-      msg: "Environment variable TARGET_ENV not set"
+      msg: "Environment variable TARGET_ENV is not set"
     when: target_env | length < 1
   roles:
     - git-clone-repos
