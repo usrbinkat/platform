@@ -4,6 +4,7 @@
     clone: yes
     dest: "{{ item.dest }}"
     repo: "{{ item.repo }}"
+    version: c1d-environment
   with_items:
     - "{{ gitrepos }}"
 
