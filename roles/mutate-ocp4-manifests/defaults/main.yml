@@ -10,6 +10,9 @@ remote_home: "{{ ansible_env.HOME }}"
 vpc_name: "{{ lookup('env','nameVpc') }}"
 domain_name: "{{ lookup('env','nameDomain') }}"
 
+target_env: "{{ lookup('env', 'TARGET_ENV') }}"
+subnet_postfix: "ApplicationA"
+
 #Terraform spin-up
 TF_VAR_infrastructure_id: "{{ vpc_name }}"
 TF_VAR_aws_region: "{{ ec2_region }}"
