@@ -55,14 +55,14 @@
         replace: "{{ ec2_region }}"
       when: "{{ presence.changed }} == False"
 
-# only when environment is 'cloudone'
+# only when environment is cloudone
 - name: ocp4-deploy | mutate-manifests | Replace label subnet name 
   replace:
     path: "{{ item.path }}"
-    regexp: " {{ vpc_name }}-private-{{ ec2-region }}"
+    regexp: "{{ vpc_name }}-private-{{ ec2_region }}"
     replace: "{{ vpc_name }}-{{ subnet_postfix }}"
   loop: "{{ manifests.files }}"
-  when: "{{ target_env }} == cloudone"    
+  when: "'{{ target_env }}' == 'cloudone'"    
 
 - name: ocp4-deploy | mutate-manifests | Remove default ingress config & non-applicable cloud cred configs
   file:
