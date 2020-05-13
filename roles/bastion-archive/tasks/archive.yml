@@ -1,0 +1,8 @@
+---
+# This tarball is used in the next task for uploading images to container registry
+- name: ocp4-deploy | task03-deploy | Archive images and artifacts
+  command:
+    "tar -cvzf {{ home_directory }}/PlatformOne.tar.gz \
+     -C {{ home_directory }} PlatformOne"
+  args:
+    creates: "{{ home_directory }}/PlatformOne.tar.gz"

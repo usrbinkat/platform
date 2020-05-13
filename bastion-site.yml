@@ -3,6 +3,7 @@
 - import_playbook: tf-base.yml
 - import_playbook: tf-registry.yml
 - import_playbook: bastion-init.yml
+- import_playbook: bastion-archive.yml
 - import_playbook: task-03-registry.yml
 - import_playbook: tf-bootstrap.yml
 - import_playbook: tf-masters.yml

@@ -1,0 +1,4 @@
+---
+# tasks file for bastion-archive
+- name: ocp4-deploy | workstation | registry-pre-init
+  include_tasks: archive.yml

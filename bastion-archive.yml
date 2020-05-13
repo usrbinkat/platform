@@ -1,0 +1,6 @@
+---
+- name: ocp4-deploy | create archive for the registry server
+  hosts: localhost
+  connection: local
+  roles:
+    - bastion-archive
