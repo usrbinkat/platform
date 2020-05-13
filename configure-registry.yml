@@ -1,0 +1,7 @@
+---
+- name: ocp4-deploy | configure registry services on registry node
+  hosts: registry
+  become: true
+  roles:
+    - registry-config
+  

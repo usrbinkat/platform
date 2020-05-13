@@ -1,0 +1,4 @@
+---
+# tasks file for registry-config
+- name: ocp4-deploy | registry-config | configure registry services
+  include_tasks: registry-services.yml
