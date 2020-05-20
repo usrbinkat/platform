@@ -1,5 +1,5 @@
 #!/usr/bin/env ansible-playbook
-- import_playbook: modules/prep.yml
-- import_playbook: modules/manifests.yml
-- import_playbook: modules/ignition.yml
-- import_playbook: modules/bundle.yml
+- import_playbook: prep.yml
+- import_playbook: manifests.yml
+- import_playbook: ignition.yml
+- import_playbook: bundle.yml
