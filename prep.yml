@@ -1,0 +1,13 @@
+#!/usr/local/bin/ansible-playbook --inventory=inventory
+- name: '{{ ansible_name }} | deploy | prep' 
+  hosts: localhost
+  connection: local
+  vars:
+    module: "prep"
+    ansible_name_module: "{{ ansible_name }} | {{ module }}"
+    dir_artifacts_manifest: "{{ dir_artifacts }}/data/manifests"
+    dir_artifacts_openshift: "{{ dir_artifacts }}/data/manifests"
+  vars_files:
+    - variables
+  roles:
+    - prep

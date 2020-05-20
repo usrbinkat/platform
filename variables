@@ -1,0 +1,66 @@
+---
+# Git Sources
+git_branch: "master"
+url_git_deploy: 'https://gitlab.consulting.redhat.com/platformone/openshift/ocp4x/ansible/deploy.git'
+url_git_mirror: 'https://gitlab.consulting.redhat.com/platformone/openshift/ocp4x/ansible/mirror.git'
+
+# Set Cluster Airgap Mode
+#   Options:
+#     - connected
+#     - disconnected
+cluster_network_mode: "disconnected"
+
+# Cloud Provider Variables
+cloud_instance_fips: "True"
+cloud_instance_ami: "ami-0e391a5ff7eabb372"
+cloud_instance_type_master: "m5.xlarge"
+cloud_instance_type_worker: "m5.xlarge"
+cloud_instance_type_storage: "m5.xlarge"
+
+#####################################################################################################
+# End of user configurable variables
+#####################################################################################################
+# Ansible Playbook Run Variables
+ansible_name: "RedHat | PlatformOne | deploy | branch:{{ git_branch }}"
+ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+
+# Inventory of ansible artifacts
+dir_ansible: "{{ dir_one }}/ansible"
+dir_git_deploy: "{{ dir_ansible }}/deploy"
+dir_git_mirror: "{{ dir_ansible }}/mirror"
+
+# Terraform Variables
+tf_vars: "{{ dir_artifacts }}/variables/global.tfvars"
+dir_git_terraform: "{{ dir_one }}/terraform"
+
+# Cluster Variables
+name_domain: "{{ lookup('env','nameDomain') }}"
+cluster_name: "{{ lookup('env', 'nameCluster' ) }}"
+cluster_domain: "{{ lookup('env', 'clusterDomain') }}"
+name_cluster_vpc: "{{ lookup('env','nameVpc') }}"
+version_openshift: "{{ lookup('env','versOCP') }}"
+
+# Cloud Provider Variables
+cloud_region: "{{ lookup('env', 'varRegion') }}"
+cloud_zone_a: "{{ cloud_region }}a"
+cloud_zone_b: "{{ cloud_region }}b"
+cloud_zone_c: "{{ cloud_region }}c"
+
+# RedHat Quay Pull Secret
+sshkeys_priv_string: "{{ lookup('file', '{{ quay_pull_secret }}') }}"
+
+# SSH Keys
+sshkeys_pub_file: "{{ dir_artifacts }}/.ssh/id_rsa_{{ cluster_domain }}.pub"
+sshkeys_pub_string: "{{ lookup('file', '{{ sshkeys_pub_file }}') }}"
+sshkeys_priv_file: "{{ dir_artifacts }}/.ssh/id_rsa_{{ cluster_domain }}"
+sshkeys_priv_string: "{{ lookup('file', '{{ sshkeys_priv_file }}') }}"
+
+# Inventory of paths
+dir_one: "{{ local_home }}/PlatformOne"
+dir_artifacts: "{{ dir_one }}/{{ cluster_domain }}"
+
+# Hosts Environment 
+local_path: "{{ lookup('env', 'PWD') }}"
+local_home: "{{ lookup('env', 'HOME') }}"
+local_user: "{{ lookup('env', 'USER') }}"
+remote_home: "{{ ansible_env.HOME }}"

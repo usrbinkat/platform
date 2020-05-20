@@ -1,0 +1,4 @@
+---
+# tasks file for task01-init
+- name: '{{ ansible_name_module }} | role | Clone Git Dependencies' 
+  include_tasks: git.yml

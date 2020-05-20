@@ -1,0 +1,4 @@
+---
+# tasks file for task03-deploy
+- name: '{{ ansible_name_module }} | role | package all dependencies' 
+  include_tasks: package.yml
