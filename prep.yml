@@ -9,5 +9,6 @@
     dir_artifacts_openshift: "{{ dir_artifacts }}/data/manifests"
   vars_files:
     - variables
+    - aux/vars/repos.yml
   roles:
     - prep

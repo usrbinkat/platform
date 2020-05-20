@@ -3,8 +3,3 @@
 - import_playbook: manifests.yml
 - import_playbook: ignition.yml
 - import_playbook: bundle.yml
-# import_playbook: task-03-registry.yml
-# import_playbook: tf-bootstrap.yml
-# import_playbook: tf-masters.yml
-# import_playbook: post-deploy.yml
-#PlaceHolder- import_playbook: tf-vars.yml #PlaceHolder

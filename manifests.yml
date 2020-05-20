@@ -7,5 +7,6 @@
     ansible_name_module: "{{ ansible_name }} | {{ module }}"
   vars_files:
     - variables
+    - aux/vars/repos.yml
   roles:
     - manifests

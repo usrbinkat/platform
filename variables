@@ -1,21 +1,22 @@
 ---
-# Git Sources
-git_branch: "master"
-url_git_deploy: 'https://gitlab.consulting.redhat.com/platformone/openshift/ocp4x/ansible/deploy.git'
-url_git_mirror: 'https://gitlab.consulting.redhat.com/platformone/openshift/ocp4x/ansible/mirror.git'
+# Target Environment
+#   About: 
+#     This sets your target environment based on tested & supported customer environments
+#   Options:
+#     - aws_govcloud
+#     - fences
+#     - c1d
+target_environment: "fences"
+
+# Cloud Provider Variables
+cloud_instance_fips: "True"
+cloud_instance_ami: "ami-0e391a5ff7eabb372"
 
 # Set Cluster Airgap Mode
 #   Options:
 #     - connected
 #     - disconnected
 cluster_network_mode: "disconnected"
-
-# Cloud Provider Variables
-cloud_instance_fips: "True"
-cloud_instance_ami: "ami-0e391a5ff7eabb372"
-cloud_instance_type_master: "m5.xlarge"
-cloud_instance_type_worker: "m5.xlarge"
-cloud_instance_type_storage: "m5.xlarge"
 
 # Enable/Disable Terraform modules
 #   About:
@@ -24,7 +25,7 @@ cloud_instance_type_storage: "m5.xlarge"
 #   Options:
 #     - True
 #     - False
-terraform_build: "True"
+terraform_build: "False"
 
 #####################################################################################################
 # End of user configurable variables
@@ -48,6 +49,10 @@ cluster_name: "{{ lookup('env', 'nameCluster' ) }}"
 cluster_domain: "{{ lookup('env', 'clusterDomain') }}"
 name_cluster_vpc: "{{ lookup('env','nameVpc') }}"
 version_openshift: "{{ lookup('env','versOCP') }}"
+# Instance Types
+cloud_instance_type_master: "m5.xlarge"
+cloud_instance_type_worker: "m5.xlarge"
+cloud_instance_type_storage: "m5.xlarge"
 
 # Cloud Provider Variables
 cloud_region: "{{ lookup('env', 'varRegion') }}"
