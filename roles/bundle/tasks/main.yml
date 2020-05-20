@@ -5,4 +5,4 @@
 - name: '{{ ansible_name_module }} | role | download openshift container images from quay.io' 
   include_tasks: mirror-to-file.yml
 - name: '{{ ansible_name_module }} | role | package all dependencies' 
-  include_tasks: package.yml
+  include_tasks: bundle.yml

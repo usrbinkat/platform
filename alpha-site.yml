@@ -2,7 +2,7 @@
 - import_playbook: prep.yml
 - import_playbook: manifests.yml
 - import_playbook: ignition.yml
-- import_playbook: package.yml
+- import_playbook: bundle.yml
 # import_playbook: task-03-registry.yml
 # import_playbook: tf-bootstrap.yml
 # import_playbook: tf-masters.yml
