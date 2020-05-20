@@ -19,3 +19,13 @@
   file:
     path: "{{ local_home }}/PlatformOne.tar.gz"
     state: absent
+
+# TODO:
+#   Instead of `copy` to move file to /root/PlatformOne/
+#     do:
+#     - sha256 PlatformOne.tar.gz
+#     - stage bash script to, check tar sha, unpack tarball, & launch ContainerOne
+#     - Tar: |
+#         /root/PlatformOne.tar.gz
+#         /root/PlatformOne.tar.gz.sha256
+#         /root/start.sh
