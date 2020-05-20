@@ -1,0 +1,7 @@
+---
+####### Create Unified PlatformOne.tar.gz Tarball with all offline deploy requirements
+- name: ocp4-deploy | task03-deploy | Archive images and artifacts
+  command:
+    "tar -cvzf {{ local_home }}/PlatformOne.tar.gz -C {{ local_home }} PlatformOne"
+  args:
+    creates: "{{ local_home }}/PlatformOne.tar.gz"

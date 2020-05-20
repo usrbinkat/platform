@@ -17,6 +17,15 @@ cloud_instance_type_master: "m5.xlarge"
 cloud_instance_type_worker: "m5.xlarge"
 cloud_instance_type_storage: "m5.xlarge"
 
+# Enable/Disable Terraform modules
+#   About:
+#     Set to false if building in a pre-existing vpc
+#     Set to true to enable from scratch vpc build
+#   Options:
+#     - True
+#     - False
+terraform_build: "True"
+
 #####################################################################################################
 # End of user configurable variables
 #####################################################################################################
