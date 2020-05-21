@@ -62,7 +62,7 @@ cloud_zone_b: "{{ cloud_region }}b"
 cloud_zone_c: "{{ cloud_region }}c"
 
 # RedHat Quay Pull Secret
-redhat_quay_pull_string: '{{ lookup("file", "{{ dir_one }}/{{ lookup("env", "p1ClusterDomain") }}/.docker/master.json") }}'
+redhat_quay_pull_string: "{{ lookup('env', 'p1DirArtifacts') }}/.docker/master.json) }}"
 
 # SSH Keys
 sshkeys_pub_file: "{{ dir_artifacts }}/.ssh/id_rsa_{{ cluster_domain }}.pub"
