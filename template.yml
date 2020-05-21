@@ -10,6 +10,7 @@
     tmpl_installconfig_j2: "{{ dir_deploy_templates }}/openshift-install/{{ cloud_provider }}-{{ target_environment }}-install-config.yaml.j2"
     cloud_key_id_special: "{{ lookup('ini', 'aws_access_key_id section=default file={{ dir_artifacts }}/.aws/govcloud.credentials') }}"
     cloud_key_secret_special: "{{ lookup('ini', 'aws_secret_access_key section=default file={{ dir_artifacts }}/.aws/govcloud.credentials') }}"
+    redhat_quay_pull_file: '{{ dir_artifacts }}/.docker/master.json }}'
   vars_files:
     - 'variables'
     - 'p1.yml'
