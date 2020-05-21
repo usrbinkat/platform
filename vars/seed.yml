@@ -1,4 +1,5 @@
 ---
+cloud_provider: 'aws'
 local_path: "{{ lookup('env', 'PWD') }}"
 local_home: "{{ lookup('env', 'HOME') }}"
 local_user: "{{ lookup('env', 'USER') }}"
