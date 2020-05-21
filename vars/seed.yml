@@ -11,6 +11,5 @@ cluster_domain: "{{ lookup('env', 'clusterDomain') }}"
 name_cluster_vpc: "{{ lookup('env','nameVpc') }}"
 version_openshift: "{{ lookup('env','versOCP') }}"
 dir_deploy: '{{ dir_one }}/ansible/deploy'
-ansible_varsj2: '{{ dir_one }}/ansible/deploy/templates/ansible/variables.j2'
 dir_artifacts: "{{ dir_one }}/{{ cluster_domain }}"
 dir_ansible: '/root/PlatformOne/ansible'
