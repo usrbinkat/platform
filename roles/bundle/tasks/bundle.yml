@@ -5,10 +5,9 @@
     path: "{{ local_home }}/PlatformOne.tar.gz"
     state: absent
 
-- name: '{{ ansible_name_module }} | role | command:tar | build tarball bundle of all artifacts'
+- name: '{{ ansible_name_module }} | role | command tar | build tarball bundle of all artifacts'
   command:
     "tar -cvzf {{ local_home }}/PlatformOne.tar.gz -C {{ local_home }} PlatformOne"
-  warn: false
   args:
     creates: "{{ local_home }}/PlatformOne.tar.gz"
 
