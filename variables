@@ -1,8 +1,9 @@
 ---
+
 # Target Environment
-#   About: 
+#   About 
 #     This sets your target environment based on tested & supported customer environments
-#   Options:
+#   Options
 #     - aws_govcloud
 #     - fences
 #     - c1d
@@ -13,16 +14,16 @@ cloud_instance_fips: "True"
 cloud_instance_ami: "ami-0e391a5ff7eabb372"
 
 # Set Cluster Airgap Mode
-#   Options:
+#   Options
 #     - connected
 #     - disconnected
 cluster_network_mode: "disconnected"
 
 # Enable/Disable Terraform modules
-#   About:
+#   About
 #     Set to false if building in a pre-existing vpc
 #     Set to true to enable from scratch vpc build
-#   Options:
+#   Options
 #     - True
 #     - False
 terraform_build: "False"
@@ -61,7 +62,7 @@ cloud_zone_b: "us-gov-west-1b"
 cloud_zone_c: "us-gov-west-1c"
 
 # RedHat Quay Pull Secret
-sshkeys_priv_string: "{"auths":{"cloud.openshift.com":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K3VzcmJpbmthdDF0amRjbzgyNzNjd3ZpcXlwajRobHFjNGpjejpSV0U0Tk80NEc1VjNNNVpCMVhUUlBZTzlZMkZQT0NDMElWNTlVVjdTTUlZQjU3TDdRNUtJN1FYWURNRkNCVkk0","email":"kathryn.morgan@braincraft.io"},"quay.io":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K3VzcmJpbmthdDF0amRjbzgyNzNjd3ZpcXlwajRobHFjNGpjejpSV0U0Tk80NEc1VjNNNVpCMVhUUlBZTzlZMkZQT0NDMElWNTlVVjdTTUlZQjU3TDdRNUtJN1FYWURNRkNCVkk0","email":"kathryn.morgan@braincraft.io"},"registry.connect.redhat.com":{"auth":"NTI5OTM2OTl8dWhjLTFUakRDTzgyNzNDV1ZpcVlQSjRIbFFjNEpjWjpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSTVNekl3T1RrMll6UmxORFEwTlRJNU9UTmhZV1EyTXpNelpHVmxPRFpqT0NKOS5ieTdSbV9Gd3UwbUpVRTd5OE04V2lod0x1d2NjZWR1MmVQT1VaTEJZVXZ5WklMTXNGQmVxd0VRMXA0WVJ5aUEydkQwMTJnYWZ3bjhRZGV0Sk5ITTduU0RaYmVRTW9FLVpOV1JhR1M3aExQUTRWeGU3ODdBaXFnR0hGdHhLcUE5aWtQWkxJQzNDeXZCdi1hZUEyYzRoV3BmeXpwMkhRb2JfZDhxSFJJUzR6STN3T1NnXzY4QVdaMEx1eHNaUEEyMzdKY055SUtKNFJ6ZGhWQ0UwaTBORjd6bVRCT2V2Y0Y3aDNabjZwRHRfMXRMdmk2eEFEcU15SDNFX3IwRHB2NWRydXIyOGE1Vjk3Vkk5ZThHdDBoUi1EZzBOMkZ1eUw4bGh0ZGEzZFhIQlhuSXhHaEZLZlc4M3hrZFBPTHExeGpCb3hnS01aY1AwVWRQZjFETzNmLTNxNGE5X1FCeDR2Z01mM3RzQnk0ZFZDMUZtZXRNYklrMVNFWklWQmZRLVV6QWxJVXJwWWdIeTgxM2IyeXNXWThkMnhFRHJ5empOOFJ3Y3JjOXVoT2J0WkE5aFBiYm1ZNTIxSVhrcWNvZ0hKTkRackdWd1dmSW5RcmRTOFU3dHRGZHVxQjBocWJRUFhwRXdhWTJLUHk5dmNzcm1TX1BGT2R2ZUNMSHUzOUlZQkZNODNaRk5LSXpjSkhYa2NJRzAtRkdXYU85a1ZYVnZLeXJnRld2di1wTUc0Z3k2NHdsLTBtTGkxYWR3VlJtRk5GYld6Zk5uR2xiLVpObzNZTXcyczJfcHhTQ2xjV0o2alQ3c1BMdXV6YS1jdVVjbktzc3pJLWE2NnRBbC0yN2N6LUxfZkk5enRzT3Z2OE1VTHlEMnAwcGVlbXVLX3VDdHRMa2hrMXBXR3liOGZPYw==","email":"kathryn.morgan@braincraft.io"},"registry.redhat.io":{"auth":"NTI5OTM2OTl8dWhjLTFUakRDTzgyNzNDV1ZpcVlQSjRIbFFjNEpjWjpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSTVNekl3T1RrMll6UmxORFEwTlRJNU9UTmhZV1EyTXpNelpHVmxPRFpqT0NKOS5ieTdSbV9Gd3UwbUpVRTd5OE04V2lod0x1d2NjZWR1MmVQT1VaTEJZVXZ5WklMTXNGQmVxd0VRMXA0WVJ5aUEydkQwMTJnYWZ3bjhRZGV0Sk5ITTduU0RaYmVRTW9FLVpOV1JhR1M3aExQUTRWeGU3ODdBaXFnR0hGdHhLcUE5aWtQWkxJQzNDeXZCdi1hZUEyYzRoV3BmeXpwMkhRb2JfZDhxSFJJUzR6STN3T1NnXzY4QVdaMEx1eHNaUEEyMzdKY055SUtKNFJ6ZGhWQ0UwaTBORjd6bVRCT2V2Y0Y3aDNabjZwRHRfMXRMdmk2eEFEcU15SDNFX3IwRHB2NWRydXIyOGE1Vjk3Vkk5ZThHdDBoUi1EZzBOMkZ1eUw4bGh0ZGEzZFhIQlhuSXhHaEZLZlc4M3hrZFBPTHExeGpCb3hnS01aY1AwVWRQZjFETzNmLTNxNGE5X1FCeDR2Z01mM3RzQnk0ZFZDMUZtZXRNYklrMVNFWklWQmZRLVV6QWxJVXJwWWdIeTgxM2IyeXNXWThkMnhFRHJ5empOOFJ3Y3JjOXVoT2J0WkE5aFBiYm1ZNTIxSVhrcWNvZ0hKTkRackdWd1dmSW5RcmRTOFU3dHRGZHVxQjBocWJRUFhwRXdhWTJLUHk5dmNzcm1TX1BGT2R2ZUNMSHUzOUlZQkZNODNaRk5LSXpjSkhYa2NJRzAtRkdXYU85a1ZYVnZLeXJnRld2di1wTUc0Z3k2NHdsLTBtTGkxYWR3VlJtRk5GYld6Zk5uR2xiLVpObzNZTXcyczJfcHhTQ2xjV0o2alQ3c1BMdXV6YS1jdVVjbktzc3pJLWE2NnRBbC0yN2N6LUxfZkk5enRzT3Z2OE1VTHlEMnAwcGVlbXVLX3VDdHRMa2hrMXBXR3liOGZPYw==","email":"kathryn.morgan@braincraft.io"},"registry.school.of.rock":{"auth":"U09SOlNPUg==","email":null}}}"
+redhat_quay_pull_string: "/.docker/master.json) }}"
 
 # SSH Keys
 sshkeys_pub_file: "/root/PlatformOne/school.of.rock/.ssh/id_rsa_school.of.rock.pub"

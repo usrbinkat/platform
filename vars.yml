@@ -11,6 +11,7 @@
     dir_one: "{{ lookup('env', 'HOME')  }}/PlatformOne"
     dir_artifacts: "{{ lookup('env', 'p1DirArtifacts')  }}"
     ansible_varsj2: '{{ dir_one }}/ansible/deploy/templates/ansible/variables.j2'
+    cluster_domain: "{{ lookup('env', 'p1ClusterDomain')  }}"
   vars_files:
     - vars/seed.yml
   tasks:
