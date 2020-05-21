@@ -63,6 +63,7 @@ cloud_zone_c: "us-gov-west-1c"
 
 # RedHat Quay Pull Secret
 redhat_quay_pull_string: "/.docker/master.json) }}"
+quay_pull_secret_mirror_string: "/.docker/mirror.json) }}"
 
 # SSH Keys
 sshkeys_pub_file: "/root/PlatformOne/school.of.rock/.ssh/id_rsa_school.of.rock.pub"
