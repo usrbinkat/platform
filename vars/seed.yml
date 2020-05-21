@@ -1,15 +1,9 @@
 ---
-cloud_provider: 'aws'
 local_path: "{{ lookup('env', 'PWD') }}"
 local_home: "{{ lookup('env', 'HOME') }}"
 local_user: "{{ lookup('env', 'USER') }}"
-dir_one: '/root/PlatformOne'
-name_domain: "{{ lookup('env','p1NameDomain') }}"
-cluster_name: "{{ lookup('env', 'p1NameCluster' ) }}"
-cluster_domain: "{{ lookup('env', 'p1ClusterDomain') }}"
-sshkeys_priv_file: "{{ lookup('env', 'p1DirArtifacts') }}/.ssh/id_rsa_{{ cluster_domain }}"
-sshkeys_pub_file: "{{ lookup('env', 'p1DirArtifacts') }}/.ssh/id_rsa_{{ cluster_domain }}.pub"
-name_cluster_vpc: "{{ lookup('env','p1NameVpc') }}"
-version_openshift: "{{ lookup('env','versOCP') }}"
-dir_deploy: '{{ dir_one }}/ansible/deploy'
-dir_ansible: '/root/PlatformOne/ansible'
+dir_one: "{{ lookup('env', 'HOME') }}/PlatformOne"
+dir_ansible: "{{ lookup('env', 'HOME') }}/PlatformOne/ansible"
+dir_deploy: "{{ lookup('env', 'HOME') }}/PlatformOne/ansible/deploy"
+sshkeys_priv_file: "{{ dir_artifacts }}/.ssh/id_rsa_{{ cluster_domain }}"
+sshkeys_pub_file: "{{ dir_artifacts }}/.ssh/id_rsa_{{ cluster_domain }}.pub"
