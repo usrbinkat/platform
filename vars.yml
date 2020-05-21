@@ -1,21 +1,20 @@
-#!/usr/local/bin/ansible-playbook --inventory=inventory
-- name: '{{ ansible_name }} | bundle | vars' 
+#!/usr/local/bin/ansible-playbook
+- name: 'RedHat | PlatformOne | bundle | vars' 
   hosts: localhost
   connection: local
   vars:
     module: "vars"
-    dir_one: '/root/PlatformOne'
+    git_branch: master
+    cloud_region: "us-gov-west-1"
+    ansible_name: 'RedHat | PlatformOne'
     ansible_name_module: "{{ ansible_name }} | {{ module }}"
-    ansible_varsj2: '{{ dir_one }}/ansible/deploy/aux/templates/ansible/variables.j2'
-    dir_deploy: '{{ dir_one }}/ansible/deploy/'
-  var_files:
+  vars_files:
     - vars/seed.yml
   tasks:
-    - name: '{{ ansible_name }} | bundle | stage variables file' 
+    - name: '{{ ansible_name_module }} | bundle | stage variables file' 
       template:
-        src: '{{ ansible_varsj2 }}'
-        dest: 
-        state: hard
+        src: '{{ item.src }}'
+        dest: '{{ item.dest }}'
       with_items:
-        - { src: '{{ dir_one }}/environment', dest: '/etc/profile.d/ansible.env' }
         - { src: '{{ ansible_varsj2 }}', dest: '{{ dir_deploy }}/variables' }
+        - { src: '{{ dir_artifacts }}/environment', dest: '/etc/profile.d/one.env' }

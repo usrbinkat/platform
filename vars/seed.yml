@@ -1,1 +1,16 @@
 ---
+local_path: "{{ lookup('env', 'PWD') }}"
+local_home: "{{ lookup('env', 'HOME') }}"
+local_user: "{{ lookup('env', 'USER') }}"
+sshkeys_pub_file: "{{ dir_artifacts }}/.ssh/id_rsa_{{ cluster_domain }}.pub"
+sshkeys_priv_file: "{{ dir_artifacts }}/.ssh/id_rsa_{{ cluster_domain }}"
+dir_one: '/root/PlatformOne'
+name_domain: "{{ lookup('env','nameDomain') }}"
+cluster_name: "{{ lookup('env', 'nameCluster' ) }}"
+cluster_domain: "{{ lookup('env', 'clusterDomain') }}"
+name_cluster_vpc: "{{ lookup('env','nameVpc') }}"
+version_openshift: "{{ lookup('env','versOCP') }}"
+dir_deploy: '{{ dir_one }}/ansible/deploy'
+ansible_varsj2: '{{ dir_one }}/ansible/deploy/templates/ansible/variables.j2'
+dir_artifacts: "{{ dir_one }}/{{ cluster_domain }}"
+dir_ansible: '/root/PlatformOne/ansible'
