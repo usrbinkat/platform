@@ -63,7 +63,8 @@ cloud_zone_b: "{{ cloud_region }}b"
 cloud_zone_c: "{{ cloud_region }}c"
 
 # Pull Secrets
-redhat_quay_pull_string: '{{ lookup("file", "{{ dir_artifacts }}/.docker/master.json") }}'
+redhat_quay_pull_file: '{{ dir_artifacts }}/.docker/master.json }}'
+redhat_quay_pull_string: '{{ lookup("file", "{{ redhat_quay_pull_file }}") }}'
 quay_pull_secret_mirror_string: '{{ lookup("file", "{{ dir_artifacts }}/.docker/mirror.json") }}'
 
 # SSH Keys
