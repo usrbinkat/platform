@@ -1,5 +1,5 @@
 #!/usr/bin/env ansible-playbook
-# import_playbook: vars.yml
+- import_playbook: vars.yml
 - import_playbook: template.yml
 - import_playbook: prep.yml
 - import_playbook: manifests.yml
