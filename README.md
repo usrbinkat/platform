@@ -69,7 +69,7 @@ Specifically the following people:
 * mholmes@redhat.com
 * jhultz@redhat.com
 * dino@redhat.com
-* kmorgan@redhat.com
+* kathryn@redhat.com
 * dlystra@redhat.com
 * mradecker@redhat.com
 
