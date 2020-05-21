@@ -1,0 +1,18 @@
+#!/usr/local/bin/ansible-playbook --inventory=inventory
+- name: '{{ ansible_name }} | bundle | template' 
+  hosts: localhost
+  connection: local
+  vars:
+    module: "template"
+    ansible_name_module: "{{ ansible_name }} | bundle | {{ module }}"
+    local_home: "{{ lookup('env', 'HOME') }}"
+    dir_one: "{{ local_home }}/PlatformOne"
+    dir_ansible: "{{ dir_one }}/ansible"
+    dir_ansible_deploy: "{{ dir_ansible }}/deploy"
+    tmpl_ansible_variables_j2: "{{ dir_ansible }}/deploy"
+  tasks:
+    - name: '{{ ansible_name_module }} | copy' 
+      template:
+        src: '{{ dir_artifacts }}/environment'
+        path: /etc/profile.d/environment
+        state: hard

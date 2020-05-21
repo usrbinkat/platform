@@ -9,7 +9,7 @@
     ansible_varsj2: '{{ dir_one }}/ansible/deploy/aux/templates/ansible/variables.j2'
     dir_deploy: '{{ dir_one }}/ansible/deploy/'
   var_files:
-    - aux/vars/seed.yml
+    - vars/seed.yml
   tasks:
     - name: '{{ ansible_name }} | deploy | stage variables file' 
       template:
