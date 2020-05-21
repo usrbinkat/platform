@@ -2,20 +2,16 @@
 - name: 'RedHat | PlatformOne | bundle | vars' 
   hosts: localhost
   connection: local
-  vars:
-    module: "vars"
-    git_branch: master
-    cloud_provider: "aws"
-    cloud_region: "us-gov-west-1"
-    ansible_name: 'RedHat | PlatformOne'
-    ansible_name_module: "{{ ansible_name }} | {{ module }}"
-    dir_one: "{{ lookup('env', 'HOME')  }}/PlatformOne"
-    ansible_varsj2: '{{ dir_one }}/ansible/deploy/templates/ansible/variables.j2'
-    cluster_domain: "{{ lookup('env', 'p1ClusterDomain')  }}"
-    redhat_quay_pull_file: '{{ dir_artifacts }}/.docker/master.json }}'
   vars_files:
     - p1.yml
     - vars/seed.yml
+  vars:
+    module: "vars"
+    git_branch: master
+    ansible_name: 'RedHat | PlatformOne'
+    ansible_name_module: "{{ ansible_name }} | {{ module }}"
+    ansible_varsj2: '{{ dir_git_deploy }}/templates/ansible/variables.j2'
+    redhat_quay_pull_file: '{{ dir_artifacts }}/.docker/master.json }}'
   tasks:
     - name: '{{ ansible_name_module }} | bundle | stage variables file' 
       template:
