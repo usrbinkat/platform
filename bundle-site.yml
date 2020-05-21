@@ -1,4 +1,4 @@
-#!/usr/bin/env ansible-playbook
+#!/usr/local/bin/ansible-playbook
 - import_playbook: vars.yml
 - import_playbook: template.yml
 - import_playbook: prep.yml
