@@ -5,3 +5,4 @@
 - import_playbook: manifests.yml
 - import_playbook: ignition.yml
 - import_playbook: bundle.yml
+- import_playbook: upload.yml
