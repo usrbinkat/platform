@@ -4,7 +4,7 @@
   connection: local
   vars:
     module: "template"
-    cloud_provider: "{{ cloud_provider }}"
+    cloud_provider: "aws"
     ansible_name_module: "{{ ansible_name }} | bundle | {{ module }}"
     dir_deploy_templates: "{{ dir_git_deploy }}/templates"
     tmpl_installconfig_j2: "{{ dir_deploy_templates }}/openshift-install/{{ cloud_provider }}-{{ target_environment }}-install-config.yaml.j2"
