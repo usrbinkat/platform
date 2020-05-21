@@ -66,9 +66,6 @@ sshkeys_pub_string: "{{ lookup('file', '{{ sshkeys_pub_file }}') }}"
 sshkeys_priv_file: "{{ dir_artifacts }}/.ssh/id_rsa_{{ cluster_domain }}"
 sshkeys_priv_string: "{{ lookup('file', '{{ sshkeys_priv_file }}') }}"
 
-# Inventory of paths
-dir_one: "{{ local_home }}/PlatformOne"
-
 # Hosts Environment 
 local_path: "{{ lookup('env', 'PWD') }}"
 local_home: "{{ lookup('env', 'HOME') }}"

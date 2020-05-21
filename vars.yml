@@ -10,7 +10,7 @@
     git_branch: master
     ansible_name: 'RedHat | PlatformOne'
     ansible_name_module: "{{ ansible_name }} | {{ module }}"
-    dir_git_deploy: '{{ dir_artifacts }}/ansible/deploy'
+    dir_git_deploy: '{{ dir_one }}/ansible/deploy'
     ansible_varsj2: '{{ dir_git_deploy }}/templates/ansible/variables.j2'
     redhat_quay_pull_file: '{{ dir_artifacts }}/.docker/master.json }}'
   tasks:
