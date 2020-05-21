@@ -12,6 +12,7 @@
     cloud_key_secret_special: "{{ lookup('ini', 'aws_secret_access_key section=default file={{ dir_artifacts }}/.aws/govcloud.credentials') }}"
   vars_files:
     - 'variables'
+    - 'p1.yml'
     - 'vars/repos.yml'
     - 'vars/{{ target_environment }}.yml'
   tasks:

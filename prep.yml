@@ -8,6 +8,7 @@
     dir_artifacts_manifest: "{{ dir_artifacts }}/data/manifests"
     dir_artifacts_openshift: "{{ dir_artifacts }}/data/manifests"
   vars_files:
+    - 'p1.yml'
     - 'variables'
     - 'vars/repos.yml'
     - 'vars/{{ target_environment }}.yml'

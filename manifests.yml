@@ -6,6 +6,7 @@
     module: "manifests"
     ansible_name_module: "{{ ansible_name }} | {{ module }}"
   vars_files:
+    - 'p1.yml'
     - variables
     - vars/repos.yml
     - vars/{{ target_environment }}.yml

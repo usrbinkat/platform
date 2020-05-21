@@ -14,6 +14,7 @@
     ansible_varsj2: '{{ dir_one }}/ansible/deploy/templates/ansible/variables.j2'
     cluster_domain: "{{ lookup('env', 'p1ClusterDomain')  }}"
   vars_files:
+    - p1.yml
     - vars/seed.yml
   tasks:
     - name: '{{ ansible_name_module }} | bundle | stage variables file' 
