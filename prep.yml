@@ -12,10 +12,9 @@
     - 'vars/repos.yml'
     - 'vars/{{ target_environment }}.yml'
   tasks:
-    - name: '{{ ansible_name_module }} | prep' 
-      file:
+    - name: '{{ ansible_name_module }} | file | stage environment variables globally' 
+      copy:
         src: '{{ dir_artifacts }}/environment'
-        path: /etc/profile.d/environment
-        state: hard
+        dest: '/etc/profile.d/environment'
   roles:
     - prep

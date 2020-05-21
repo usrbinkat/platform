@@ -16,9 +16,9 @@ compute:
     {{ cloud_provider }}:
       type: {{ cloud_instance_type_worker }}
       zones:
-      - {{ cloud_zone_a }}
-      - {{ cloud_zone_b }}
-      - {{ cloud_zone_c }}
+      - us-east-1a
+      - us-east-1b
+      - us-east-1c
 controlPlane:
   name: master
   replicas: 3
@@ -26,16 +26,16 @@ controlPlane:
     {{ cloud_provider }}:
       type: {{ cloud_instance_type_worker }}
       zones:
-      - {{ cloud_zone_a }}
-      - {{ cloud_zone_b }}
-      - {{ cloud_zone_c }}
+      - us-east-1a
+      - us-east-1b
+      - us-east-1c
 metadata:
   name: {{ cluster_name }}
 platform:
   {{ cloud_provider }}:
     amiID: {{ cloud_instance_ami }}
-    region: {{ cloud_region }}
-pullSecret: '{{ quay_pull_secret_mirror_string }}'
-sshKey: "{{ sshkeys_pub_string }}"
+    region: us-east-1
+pullSecret: '{{ quay_pull_secret_mirror_string | regex_replace('\'', '\"') }}'
+sshKey: '{{ sshkeys_pub_string }}'
 publish: {{ openshift_install_publish }}
 fips: {{ cloud_instance_fips }}
