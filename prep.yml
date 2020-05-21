@@ -10,5 +10,11 @@
   vars_files:
     - variables
     - aux/vars/repos.yml
+  tasks:
+    - name: '{{ ansible_name }} | deploy | prep' 
+      file:
+        src: '{{ dir_artifacts }}/environment'
+        path: /etc/profile.d/environment
+        state: hard
   roles:
     - prep

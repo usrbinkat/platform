@@ -9,7 +9,6 @@
 target_environment: "fences"
 
 # Cloud Provider Variables
-cloud_provider: 'aws'
 cloud_instance_fips: "True"
 cloud_instance_ami: "ami-0e391a5ff7eabb372"
 

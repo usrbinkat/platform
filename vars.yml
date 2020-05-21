@@ -1,0 +1,21 @@
+#!/usr/local/bin/ansible-playbook --inventory=inventory
+- name: '{{ ansible_name }} | deploy | vars' 
+  hosts: localhost
+  connection: local
+  vars:
+    module: "vars"
+    dir_one: '/root/PlatformOne'
+    ansible_name_module: "{{ ansible_name }} | {{ module }}"
+    ansible_varsj2: '{{ dir_one }}/ansible/deploy/aux/templates/ansible/variables.j2'
+    dir_deploy: '{{ dir_one }}/ansible/deploy/'
+  var_files:
+    - aux/vars/seed.yml
+  tasks:
+    - name: '{{ ansible_name }} | deploy | stage variables file' 
+      template:
+        src: '{{ ansible_varsj2 }}'
+        dest: 
+        state: hard
+      with_items:
+        - { src: '{{ dir_one }}/environment', dest: '/etc/profile.d/ansible.env' }
+        - { src: '{{ ansible_varsj2 }}', dest: '{{ dir_deploy }}/variables' }
