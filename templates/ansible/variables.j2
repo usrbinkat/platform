@@ -46,10 +46,10 @@ tf_vars: "{{ dir_artifacts }}/variables/global.tfvars"
 dir_git_terraform: "{{ dir_one }}/terraform"
 
 # Cluster Variables
-name_domain: "{{ lookup('env','nameDomain') }}"
-cluster_name: "{{ lookup('env', 'nameCluster' ) }}"
-cluster_domain: "{{ lookup('env', 'clusterDomain') }}"
-name_cluster_vpc: "{{ lookup('env','nameVpc') }}"
+name_domain: "{{ lookup('env','p1NameDomain') }}"
+cluster_name: "{{ lookup('env', 'p1NameCluster' ) }}"
+cluster_domain: "{{ lookup('env', 'p1ClusterDomain') }}"
+name_cluster_vpc: "{{ lookup('env','p1NameVpc') }}"
 version_openshift: "{{ lookup('env','versOCP') }}"
 # Instance Types
 cloud_instance_type_master: "m5.xlarge"
@@ -57,7 +57,7 @@ cloud_instance_type_worker: "m5.xlarge"
 cloud_instance_type_storage: "m5.xlarge"
 
 # Cloud Provider Variables
-cloud_region: "{{ lookup('env', 'varRegion') }}"
+cloud_region: "{{ lookup('env', 'p1AwsZone') }}"
 cloud_zone_a: "{{ cloud_region }}a"
 cloud_zone_b: "{{ cloud_region }}b"
 cloud_zone_c: "{{ cloud_region }}c"
@@ -65,7 +65,6 @@ cloud_zone_c: "{{ cloud_region }}c"
 # Pull Secrets
 redhat_quay_pull_string: '{{ lookup("file", "{{ dir_artifacts }}/.docker/master.json") }}'
 quay_pull_secret_mirror_string: '{{ lookup("file", "{{ dir_artifacts }}/.docker/mirror.json") }}'
-#mirror_certificate_block: '{#{ lookup("file", "{#{ dir_artifacts }}/ssl/school.of.rock.crt") }}'
 
 # SSH Keys
 sshkeys_pub_file: "{{ lookup('env', 'p1DirArtifacts') }}/.ssh/id_rsa_{{ cluster_domain }}.pub"
