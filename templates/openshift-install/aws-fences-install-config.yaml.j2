@@ -35,7 +35,7 @@ platform:
   {{ cloud_provider }}:
     amiID: {{ cloud_instance_ami }}
     region: us-east-1
-pullSecret: '{{ quay_pull_secret_mirror_string | regex_replace('\'', '\"') }}'
+pullSecret: '{{ lookup('file', '{{ dir_artifacts }}/.docker/mirror.json') | regex_replace("\'", "\"") }}'
 sshKey: '{{ sshkeys_pub_string }}'
 publish: {{ openshift_install_publish }}
 fips: {{ cloud_instance_fips }}
