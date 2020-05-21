@@ -8,8 +8,8 @@
     cloud_region: "us-gov-west-1"
     ansible_name: 'RedHat | PlatformOne'
     ansible_name_module: "{{ ansible_name }} | {{ module }}"
-    dir_artifacts: '{{ lookup("env", "p1DirArtifacts")  }}'
-    dir_one: '{{ lookup("env", "HOME")  }}/PlatformOne'
+    dir_one: "{{ lookup('env', 'HOME')  }}/PlatformOne"
+    dir_artifacts: "{{ lookup('env', 'p1DirArtifacts')  }}"
     ansible_varsj2: '{{ dir_one }}/ansible/deploy/templates/ansible/variables.j2'
   vars_files:
     - vars/seed.yml
