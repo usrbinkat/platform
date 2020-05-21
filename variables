@@ -62,6 +62,8 @@ cloud_zone_b: "{{ cloud_region }}b"
 cloud_zone_c: "{{ cloud_region }}c"
 
 # RedHat Quay Pull Secret
+mirror_certificate_block: "{{ lookup('file', '{{ dir_artifacts }}/ssl/school.of.rock.crt') }}"
+# RedHat Quay Pull Secret
 quay_pull_secret_master_string: "{{ lookup('file', '{{ dir_artifacts }}/.docker/master.json') }}"
 quay_pull_secret_mirror_string: "{{ lookup('file', '{{ dir_artifacts }}/.docker/mirror.json') }}"
 

@@ -5,14 +5,14 @@
   vars:
     module: "template"
     ansible_name_module: "{{ ansible_name }} | bundle | {{ module }}"
-    local_home: "{{ lookup('env', 'HOME') }}"
-    dir_one: "{{ local_home }}/PlatformOne"
-    dir_ansible: "{{ dir_one }}/ansible"
-    dir_ansible_deploy: "{{ dir_ansible }}/deploy"
-    tmpl_ansible_variables_j2: "{{ dir_ansible }}/deploy"
+    dir_deploy_templates: "{{ dir_git_deploy }}/templates"
+    tmpl_installconfig_j2: "{{ dir_deploy_templates }}/openshift-install/{{ cloud_provider }}-{{ target_environment }}-install-config.yaml.j2"
+  vars_files:
+    - 'variables'
+    - 'vars/repos.yml'
+    - 'vars/{{ target_environment }}.yml'
   tasks:
-    - name: '{{ ansible_name_module }} | copy' 
+    - name: '{{ ansible_name_module }} | template' 
       template:
-        src: '{{ dir_artifacts }}/environment'
-        path: /etc/profile.d/environment
-        state: hard
+        src: '{{ tmpl_installconfig_j2 }}'
+        dest: '{{ dir_artifacts }}/data/install-config.yaml'

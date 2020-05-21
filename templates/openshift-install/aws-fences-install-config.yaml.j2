@@ -1,13 +1,13 @@
 apiVersion: v1
 additionalTrustBundle: |
-{{ disconnected_mirror_certificate }}
-baseDomain: {{ domain_name }}
+{{ mirror_certificate_block | indent( width=2, indentfirst=True) }}
+baseDomain: {{ name_domain }}
 imageContentSources:
 - mirrors:
-  - {{ domain_name }}/ocp-{{ version_openshift }}
+  - {{ cluster_domain }}/ocp-{{ version_openshift }}
   source: quay.io/openshift-release-dev/ocp-release
 - mirrors:
-  - {{ domain_name }}/ocp-{{ version_openshift }}
+  - {{ cluster_domain }}/ocp-{{ version_openshift }}
   source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
 compute:
 - name: worker
@@ -36,6 +36,6 @@ platform:
     amiID: {{ cloud_instance_ami }}
     region: {{ cloud_region }}
 pullSecret: '{{ quay_pull_secret_mirror_string }}'
-sshKey: "{{ sshkeys_priv_string }}"
+sshKey: "{{ sshkeys_pub_string }}"
 publish: {{ openshift_install_publish }}
-fips: {{ cloud_instance_ami }}
+fips: {{ cloud_instance_fips }}
