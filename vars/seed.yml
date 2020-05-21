@@ -2,8 +2,8 @@
 local_path: "{{ lookup('env', 'PWD') }}"
 local_home: "{{ lookup('env', 'HOME') }}"
 local_user: "{{ lookup('env', 'USER') }}"
-sshkeys_pub_file: "{{ dir_artifacts }}/.ssh/id_rsa_{{ cluster_domain }}.pub"
-sshkeys_priv_file: "{{ dir_artifacts }}/.ssh/id_rsa_{{ cluster_domain }}"
+sshkeys_priv_file: "{{ lookup('env', 'p1DirArtifacts') }}/.ssh/id_rsa_{{ cluster_domain }}"
+sshkeys_pub_file: "{{ lookup('env', 'p1DirArtifacts') }}/.ssh/id_rsa_{{ cluster_domain }}.pub"
 dir_one: '/root/PlatformOne'
 name_domain: "{{ lookup('env','nameDomain') }}"
 cluster_name: "{{ lookup('env', 'nameCluster' ) }}"

@@ -65,9 +65,9 @@ cloud_zone_c: "{{ cloud_region }}c"
 redhat_quay_pull_string: "{{ lookup('env', 'p1DirArtifacts') }}/.docker/master.json) }}"
 
 # SSH Keys
-sshkeys_pub_file: "{{ dir_artifacts }}/.ssh/id_rsa_{{ cluster_domain }}.pub"
+sshkeys_pub_file: "{{ lookup('env', 'p1DirArtifacts') }}/.ssh/id_rsa_{{ cluster_domain }}.pub"
 sshkeys_pub_string: "{{ lookup('file', '{{ sshkeys_pub_file }}') }}"
-sshkeys_priv_file: "{{ dir_artifacts }}/.ssh/id_rsa_{{ cluster_domain }}"
+sshkeys_priv_file: "{{ lookup('env', 'p1DirArtifacts') }}/.ssh/id_rsa_{{ cluster_domain }}"
 sshkeys_priv_string: "{{ lookup('file', '{{ sshkeys_priv_file }}') }}"
 
 # Inventory of paths
