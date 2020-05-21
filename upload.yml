@@ -1,0 +1,25 @@
+#!/usr/local/bin/ansible-playbook --inventory=inventory
+- name: '{{ ansible_name }} | bundle | prep' 
+  hosts: localhost
+  connection: local
+  vars:
+    module: "upload"
+    ansible_name_module: "{{ ansible_name }} | bundle | {{ module }}"
+  vars_files:
+    - 'variables'
+    - 'vars/repos.yml'
+    - 'vars/{{ target_environment }}.yml'
+  tasks:
+
+    - name: '{{ ansible_name_module }} | aws_s3 | Create AWS S3 Bucket: {{ name_cluster_vpc }}' 
+      aws_s3:
+        bucket: '{{ name_cluster_vpc }}'
+        region: '{{ cloud_region }}'
+        mode: create
+
+    - name: '{{ ansible_name_module }} | aws_s3 | Push Bundle to AWS S3 Bucket' 
+      aws_s3:
+        bucket: '{{ name_cluster_vpc }}'
+        src: '{{ dir_one }}/PlatformOne.tar.gz'
+        dest: '/bundle/'
+        mode: put

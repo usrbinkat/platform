@@ -1,6 +1,6 @@
 ---
 ####### Clone Git Dependencies
-- name: '{{ ansible_name_module }} | role | prep | stat | find ansible .git'
+- name: '{{ ansible_name_module }} | role | stat | find ansible .git'
   stat:
     path: '{{ dir_git_mirror }}/.git'  
   register: dir_git_mirror_check
