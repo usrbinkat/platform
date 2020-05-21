@@ -1,5 +1,5 @@
 #!/usr/local/bin/ansible-playbook --inventory=inventory
-- name: '{{ ansible_name }} | deploy | ignition' 
+- name: '{{ ansible_name }} | bundle | ignition' 
   hosts: localhost
   connection: local
   vars:

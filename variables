@@ -32,7 +32,7 @@ cloud_region: "us-gov-west-1"
 # End of user configurable variables
 #####################################################################################################
 # Ansible Playbook Run Variables
-ansible_name: "RedHat | PlatformOne | deploy | branch:{{ git_branch }}"
+ansible_name: "RedHat | PlatformOne | bundle | branch:{{ git_branch }}"
 ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
 
 # Inventory of ansible artifacts
