@@ -75,7 +75,6 @@ sshkeys_priv_string: "{{ lookup('file', '{{ sshkeys_priv_file }}') }}"
 
 # Inventory of paths
 dir_one: "{{ local_home }}/PlatformOne"
-dir_artifacts: "{{ lookup('env', 'p1DirArtifacts')  }}"
 
 # Hosts Environment 
 local_path: "{{ lookup('env', 'PWD') }}"

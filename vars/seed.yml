@@ -12,5 +12,4 @@ sshkeys_pub_file: "{{ lookup('env', 'p1DirArtifacts') }}/.ssh/id_rsa_{{ cluster_
 name_cluster_vpc: "{{ lookup('env','p1NameVpc') }}"
 version_openshift: "{{ lookup('env','versOCP') }}"
 dir_deploy: '{{ dir_one }}/ansible/deploy'
-dir_artifacts: "{{ lookup('env', 'p1DirArtifacts')  }}"
 dir_ansible: '/root/PlatformOne/ansible'

@@ -10,7 +10,6 @@
     ansible_name: 'RedHat | PlatformOne'
     ansible_name_module: "{{ ansible_name }} | {{ module }}"
     dir_one: "{{ lookup('env', 'HOME')  }}/PlatformOne"
-    dir_artifacts: "{{ lookup('env', 'p1DirArtifacts')  }}"
     ansible_varsj2: '{{ dir_one }}/ansible/deploy/templates/ansible/variables.j2'
     cluster_domain: "{{ lookup('env', 'p1ClusterDomain')  }}"
     redhat_quay_pull_file: '{{ dir_artifacts }}/.docker/master.json }}'
