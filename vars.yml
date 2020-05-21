@@ -5,6 +5,7 @@
   vars:
     module: "vars"
     git_branch: master
+    cloud_provider: "aws"
     cloud_region: "us-gov-west-1"
     ansible_name: 'RedHat | PlatformOne'
     ansible_name_module: "{{ ansible_name }} | {{ module }}"
