@@ -65,7 +65,7 @@ cloud_zone_c: "{{ cloud_region }}c"
 # Pull Secrets
 redhat_quay_pull_string: '{{ lookup("file", "{{ dir_artifacts }}/.docker/master.json") }}'
 quay_pull_secret_mirror_string: '{{ lookup("file", "{{ dir_artifacts }}/.docker/mirror.json") }}'
-mirror_certificate_block: '{{ lookup("file", "{{ dir_artifacts }}/ssl/school.of.rock.crt") }}'
+#mirror_certificate_block: '{{ lookup("file", "{{ dir_artifacts }}/ssl/school.of.rock.crt") }}'
 
 # SSH Keys
 sshkeys_pub_file: "{{ lookup('env', 'p1DirArtifacts') }}/.ssh/id_rsa_{{ cluster_domain }}.pub"
