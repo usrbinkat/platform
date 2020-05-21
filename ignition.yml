@@ -8,5 +8,6 @@
   vars_files:
     - variables
     - aux/vars/repos.yml
+    - aux/vars/{{ target_environment }}.yml
   roles:
     - ignition

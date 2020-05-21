@@ -13,7 +13,7 @@ compute:
 - name: worker
   replicas: 3
   platform:
-    aws:
+    {{ cloud_provider }}:
       type: {{ cloud_instance_type_worker }}
       zones:
       - {{ cloud_zone_a }}
@@ -23,7 +23,7 @@ controlPlane:
   name: master
   replicas: 3
   platform:
-    aws:
+    {{ cloud_provider }}:
       type: {{ cloud_instance_type_worker }}
       zones:
       - {{ cloud_zone_a }}
@@ -32,10 +32,10 @@ controlPlane:
 metadata:
   name: {{ cluster_name }}
 platform:
-  aws:
+  {{ cloud_provider }}:
     amiID: {{ cloud_instance_ami }}
     region: {{ cloud_region }}
-pullSecret: '{"auths": {"registry.school.of.rock": {"auth": "U09SOlNPUg==","email": "admin@of.rock"}}}'
+pullSecret: '{{ quay_pull_secret_mirror_string }}'
 sshKey: "{{ sshkeys_priv_string }}"
-publish: Internal
+publish: {{ openshift_install_publish }}
 fips: {{ cloud_instance_ami }}

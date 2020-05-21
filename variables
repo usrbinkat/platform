@@ -3,15 +3,11 @@
 #   About: 
 #     This sets your target environment based on tested & supported customer environments
 #   Options:
-#     - aws_govcloud
 #     - fences
-#     - c1d
+#     X-awsgovcloud-X
+#     X-c1d-X
 target_environment: "fences"
 
-# Cloud Provider Variables
-cloud_provider: 'aws'
-cloud_instance_fips: "True"
-cloud_instance_ami: "ami-0e391a5ff7eabb372"
 
 # Set Cluster Airgap Mode
 #   Options:
@@ -27,6 +23,10 @@ cluster_network_mode: "disconnected"
 #     - True
 #     - False
 terraform_build: "False"
+
+# Cloud Provider Variables
+cloud_provider: 'aws'
+cloud_region: "us-gov-west-1"
 
 #####################################################################################################
 # End of user configurable variables
@@ -56,13 +56,14 @@ cloud_instance_type_worker: "m5.xlarge"
 cloud_instance_type_storage: "m5.xlarge"
 
 # Cloud Provider Variables
-cloud_region: "{{ lookup('env', 'varRegion') }}"
+#cloud_region: "{{ lookup('env', 'varRegion') }}"
 cloud_zone_a: "{{ cloud_region }}a"
 cloud_zone_b: "{{ cloud_region }}b"
 cloud_zone_c: "{{ cloud_region }}c"
 
 # RedHat Quay Pull Secret
-sshkeys_priv_string: "{{ lookup('file', '{{ dir_artifacts }}/.docker/master.json') }}"
+quay_pull_secret_master_string: "{{ lookup('file', '{{ dir_artifacts }}/.docker/master.json') }}"
+quay_pull_secret_mirror_string: "{{ lookup('file', '{{ dir_artifacts }}/.docker/mirror.json') }}"
 
 # SSH Keys
 sshkeys_pub_file: "{{ dir_artifacts }}/.ssh/id_rsa_{{ cluster_domain }}.pub"

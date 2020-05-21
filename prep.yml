@@ -8,8 +8,9 @@
     dir_artifacts_manifest: "{{ dir_artifacts }}/data/manifests"
     dir_artifacts_openshift: "{{ dir_artifacts }}/data/manifests"
   vars_files:
-    - variables
-    - aux/vars/repos.yml
+    - 'variables'
+    - 'aux/vars/repos.yml'
+    - 'aux/vars/{{ target_environment }}.yml'
   tasks:
     - name: '{{ ansible_name }} | deploy | prep' 
       file:
