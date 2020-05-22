@@ -12,6 +12,7 @@
     - 'p1.yml'
     - 'variables'
     - 'vars/repos.yml'
+    - 'vars/seed.yml'
     - 'vars/{{ target_environment }}.yml'
   tasks:
 
