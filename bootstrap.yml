@@ -1,0 +1,56 @@
+#!/usr/local/bin/ansible-playbook --inventory=inventory
+- name: 'RedHat | PlatformOne | deploy | hydrate' 
+  hosts: localhost
+  vars_files:
+    - '../p1.yml'
+    - 'vars/{{ target_environment }}.yml'
+    - 'vars/global.yml'
+  vars:
+    module: "bootstrap.tf"
+    ansible_name_module: "{{ ansible_name }} | deploy | {{ module }}"
+    dir_terraform: '{{ local_home }}/PlatformOne/terraform'
+    state_provider: "local"
+  tasks:
+
+    ####### Stage State Profider Template
+    - name: '{{ ansible_name_module }} | template | Stage state.tf & global.tfvars'
+      template:
+        src: "{{ item.name }}"
+        dest: "{{ item.dest }}"
+        mode: "{{ item.mode }}"
+        owner: "{{ local_user }}"
+      loop: 
+        - { mode: '755', name: "templates/terraform/global.tfvars.j2", dest: "{{ dir_terraform }}/global.tfvars"}
+        - { mode: '755', name: "templates/terraform/{{ state_provider }}.tfstate.j2", dest: "{{ dir_git_bootstrap }}.tfstate"}
+
+    ####### Terraform Init
+    - name: '{{ ansible_name_module }} | shell | terraform init'
+      shell: terraform init
+      args:
+        chdir: "{{ tf_module_path }}"
+
+    ####### Terraform Apply
+    - name: '{{ ansible_name_module }} | terraform | apply'
+      terraform:
+        project_path: "{{ tf_module_path }}"
+        variables_file: "{{ tf_vars }}/global.tfvars"
+        force_init: true
+        state: present
+      register: tf_output
+
+    ####### Purge SSH known_hosts entries if previous entries found
+    - name: '{{ ansible_name_module }} | lineinfile:~/.ssh/known_hosts | purge previous fingerprints'
+      lineinfile:
+        dest: "{{ local_home }}/.ssh/known_hosts"
+        regexp: "{{ item.regex }}"
+        state: absent
+      with_items:
+        - { regex: bootstrap }
+        - { regex: '{{ tf_output.outputs.public_ipv4.value }}' }
+
+    ####### Declare result & address of instance
+    - name: 'EC2: Bootstrap Node IP Address'
+      debug: 
+        msg:
+        - "EC2 Bootstrap Node created at the following ip address:"
+        - "{{ tf_output.outputs.public_ipv4.value }}"
