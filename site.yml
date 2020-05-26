@@ -1,0 +1,10 @@
+#!/usr/local/bin/ansible-playbook --inventory=inventory
+- name: 'RedHat | PlatformOne | deploy' 
+  hosts: containerone
+- import_playbook: local.yml      # Load kube/docker/ssh/etc configurations locally
+- import_playbook: hydrate.yml    # Hydrate offline registry mirror with images
+# import_playbook: validation.yml # ROADMAP! NOT IMIDIATE DEVELOPMENT # Validate DNS/Reverse/LoadBallancer Network Environment
+# import_playbook: bootstrap.yml  # Launch Bootstrap Instance
+# import_playbook: masters.yml    # Launch Master Instances
+# import_playbook: monitor.yml    # Monitor cluster up status
+# import_playbook: configure.yml  # Post Deploy Cluster Config

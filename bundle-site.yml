@@ -1,8 +1,0 @@
-#!/usr/local/bin/ansible-playbook
-- import_playbook: vars.yml
-- import_playbook: template.yml
-- import_playbook: prep.yml
-- import_playbook: manifests.yml
-- import_playbook: ignition.yml
-- import_playbook: bundle.yml
-# import_playbook: upload.yml
