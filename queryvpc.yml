@@ -1,4 +1,5 @@
 #!/usr/local/bin/ansible-playbook --inventory=inventory
+# additional refrence for boilerplate code: https://repo1.dsop.io/levelup-automation/baseline/vpc-facts
 - name: 'RedHat | PlatformOne | deploy | hydrate' 
   hosts: localhost
   vars_files:
