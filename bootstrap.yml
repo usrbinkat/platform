@@ -13,7 +13,17 @@
   tasks:
 
     ####### Stage State Profider Template
-    - name: '{{ ansible_name_module }} | template | Stage state.tf & global.tfvars'
+    - name: '{{ ansible_name_module }} | file | Create State Directory'
+      file:
+        dest: "{{ item.path }}"
+        state: "{{ item.state }}"
+        recurse: 'yes'
+      loop: 
+        - { state: 'directory', path: "{{ dir_terraform }}/state/bootstrap"}
+        - { state: 'directory', path: "{{ dir_terraform }}/state/masters"}
+
+    ####### Stage State Profider Template
+    - name: '{{ ansible_name_module }} | template | Stage {{ state_provider }}.tfstate & global.tfvars'
       template:
         src: "{{ item.name }}"
         dest: "{{ item.dest }}"
@@ -21,6 +31,7 @@
         owner: "{{ local_user }}"
       loop: 
         - { mode: '755', name: "templates/terraform/global.tfvars.j2", dest: "{{ dir_terraform }}/global.tfvars"}
+        - { mode: '755', name: "templates/terraform/{{ state_provider }}.tfstate.j2", dest: "{{ dir_git_masters }}.tfstate"}
         - { mode: '755', name: "templates/terraform/{{ state_provider }}.tfstate.j2", dest: "{{ dir_git_bootstrap }}.tfstate"}
 
     ####### Terraform Init
