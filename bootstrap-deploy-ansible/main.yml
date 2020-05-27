@@ -1,0 +1,11 @@
+---
+- name: Get default group from VPC
+  ec2_group_facts:
+    region: "{{ region }}"
+    filters:
+      vpc_id: "{{ vpc_id }}"
+      group_name: "default"
+  register: ec2_group_facts
+
+- name: Provision Instances
+  include_tasks: provision.yml
