@@ -34,12 +34,6 @@
         - { mode: '755', name: "templates/terraform/{{ state_provider }}.tfstate.j2", dest: "{{ dir_git_masters }}.tfstate"}
         - { mode: '755', name: "templates/terraform/{{ state_provider }}.tfstate.j2", dest: "{{ dir_git_bootstrap }}.tfstate"}
 
-    ####### Terraform Init
-    - name: '{{ ansible_name_module }} | shell | terraform init'
-      shell: terraform init
-      args:
-        chdir: "{{ tf_module_path }}"
-
     ####### Terraform Apply
     - name: '{{ ansible_name_module }} | terraform | apply'
       terraform:
