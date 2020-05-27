@@ -8,6 +8,6 @@
   vars:
     module: "bootstrap.tf"
     state_provider: "local"
-    ansible_name_module: "{{ ansible_name }} | deploy | {{ module }}"
+    ansible_name_module: "{{ ansible_name }} | {{ module }}"
   roles:
     - bootstrap
