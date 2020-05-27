@@ -1,9 +1,9 @@
 ---
 - name: Get default group from VPC
   ec2_group_facts:
-    region: "{{ region }}"
+    region: "{{ cloud_region }}"
     filters:
-      vpc_id: "{{ vpc_id }}"
+      vpc_id: "{{ name_cluster_vpc }}"
       group_name: "default"
   register: ec2_group_facts
 
