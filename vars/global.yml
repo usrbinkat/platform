@@ -15,9 +15,11 @@ remote_home: "{{ ansible_env.HOME }}"
 dir_one: "{{ lookup('env', 'HOME') }}/PlatformOne"
 dir_ansible: "{{ lookup('env', 'HOME') }}/PlatformOne/ansible"
 dir_git_bundle: "{{ lookup('env', 'HOME') }}/PlatformOne/ansible/bundle"
+dir_artifacts: "{{ lookup('env', 'HOME') }}/PlatformOne/{{ cluster_domain }}"
 dir_git_deploy: "{{ lookup('env', 'HOME') }}/PlatformOne/ansible/deploy"
 dir_git_mirror: "{{ lookup('env', 'HOME') }}/PlatformOne/ansible/mirror"
-dir_artifacts: "{{ lookup('env', 'HOME') }}/PlatformOne/{{ cluster_domain }}"
+dir_git_masters: "{{ lookup('env', 'HOME') }}/PlatformOne/terraform/masters"
+dir_git_bootstrap: "{{ lookup('env', 'HOME') }}/PlatformOne/terraform/bootstrap"
 
 # Terraform Variables
 dir_terraform: "{{ lookup('env', 'HOME') }}/PlatformOne/terraform"
