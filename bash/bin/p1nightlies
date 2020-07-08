@@ -50,6 +50,7 @@ run_log 0 "Staging Ansible ${k9DirDeploy}/ansible/k9.yml variables file"
 # TODO: protect secrets with: "ansible-vault"
 cat <<EOF | tee ${k9DirDeploy}/ansible/cluster-vars.yml
 ---
+target_environment: "fences"
 version_openshift: "${varVerOpenshift}"
 cluster_domain: "${k9ClusterDomain}"
 cluster_name: "${k9NameCluster}"
