@@ -1,0 +1,17 @@
+---
+####### Docker Config: pull secrets for external registries (redhat.io / quay.io)
+- name: '{{ ansible_name_module }} role | manifests | openssl_certificate | docker config.json'
+  copy:
+    dest: "/root/.docker/config.json"
+    content: "{{ pull_secrets }}"
+
+####### Authentication secrets for private mirror registry
+# name: '{{ ansible_name_module }} role | manifests | openssl_certificate | docker mirror.json'
+# copy:
+#   dest: "{{ dir_cluster }}/.docker/mirror.json"
+#   content: "{{ registry_secrets }}"
+####### Merged Authentication: external and internal registries
+# name: '{{ ansible_name_module }} role | manifests | openssl_certificate | docker master.json'
+# copy:
+#   dest: "{{ dir_cluster }}/.docker/master.json"
+#   content: "{{ registry_secrets | combine(pull_secrets, recursive=True) }}"

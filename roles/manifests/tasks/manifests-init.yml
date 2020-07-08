@@ -1,0 +1,24 @@
+---
+####### Clean Manifests Destination
+- name: '{{ ansible_name_module }} | init | file:absent | Clean/Purge Old Artifacts'
+  file:
+    path: '{{ dir_cluster }}/manifests'
+    state: absent
+  tag: install-config
+- name: '{{ ansible_name_module }} | init | file:directory | Clean/Purge Old Artifacts'
+  file:
+    path: '{{ dir_cluster }}/manifests'
+    state: directory
+  tag: install-config
+
+####### Stage install-config
+- name: '{{ ansible_name_module }} | init | file:copy | Place install-config.yaml manifests dir'
+  copy:
+    src: '{{ dir_cluster }}/config/install-config.yaml'
+    dest: '{{ dir_cluster }}/manifests/install-config.yaml'
+  tag: install-config
+
+####### Generate base manifests set
+- name: '{{ ansible_name_module }} | init | shell:openshift-install | create manifests'
+  shell: "{{ openshift_install_binary }} create manifests --dir={{ dir_cluster }}/manifests"
+  tag: install-config

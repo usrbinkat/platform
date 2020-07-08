@@ -1,0 +1,7 @@
+---
+####### Generate install-config.yaml
+- name: '{{ ansible_name_module }} | init | stat | Generate install-config.yaml'
+  stat:
+    path: '{{ dir_cluster }}/config/install-config.yaml'
+  register: data_install_config_yaml
+  tag: install-config

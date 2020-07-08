@@ -1,0 +1,16 @@
+---
+- name: '{{ ansible_name_module }} | file | Create Directory Structure' 
+  file:
+    path: '{{ item }}'
+    state: directory
+    mode: '0644'
+  with_items:
+    - '{{ dir_deploy }}/secrets/registry/ssl'
+    - '{{ dir_deploy }}/secrets/registry/auth'
+    - '{{ dir_deploy }}/secrets/docker'
+    - '{{ dir_deploy }}/secrets/ssh'
+    - '{{ dir_deploy }}/terraform'
+    - '{{ dir_deploy }}/ansible'
+    - '{{ dir_deploy }}/mirror'
+    - '{{ dir_deploy }}/images'
+    - '{{ dir_deploy }}/nginx'

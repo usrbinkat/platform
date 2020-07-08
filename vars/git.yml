@@ -1,7 +1,9 @@
 ---
-# (Repo1) Git Source & Destination
-# (RedHatOfficial) Git Source & Destination
+# (CCIO) Git Sources
+# (Repo1) Git Source
+# (RedHatOfficial) Git Sources
 keyfile: '/root/.ssh/id_rsa'
+git_branch: v2-govcloud-automation
 
 # Ansible Git Repos
 url_git_bundle: 'https://repo1.dsop.io/dsop/redhat/platformone/ocp4x/ansible/bundle.git'
@@ -16,12 +18,29 @@ url_git_tfmasters: 'https://repo1.dsop.io/dsop/redhat/platformone/ocp4x/terrafor
 url_git_tfcloudctl: 'https://repo1.dsop.io/dsop/redhat/platformone/ocp4x/terraform/cloudctl.git'
 url_git_tfbootstrap: 'https://repo1.dsop.io/dsop/redhat/platformone/ocp4x/terraform/bootstrap.git'
 
+url_git_tffences: 'https://repo1.dsop.io/dsop/redhat/platformone/ocp4x/terraform/fences.git'
+dir_git_tffences: "{{ dir_terraform }}/fences"
+
+dir_git_build: "{{ dir_ansible }}/build"
+dir_git_bundle: "{{ dir_ansible }}/bundle"
+dir_git_deploy: "{{ dir_ansible }}/deploy"
+dir_git_tfcore: "{{ dir_ansible }}/core"
+dir_git_cloudctl: "{{ dir_ansible }}/cloudctl"
+dir_git_configure: "{{ dir_ansible }}/configure"
+dir_git_tfmasters: "{{ dir_terraform }}/masters"
+dir_git_tfcloudctl: "{{ dir_ansible }}/cloudctl"
+dir_git_tfbootstrap: "{{ dir_ansible }}/bootstrap"
+
 # Git Clone Items
 ansiblerepos:
-  - repo: "{{ url_git_bundle }}"
-    dest: "{{ dir_git_bundle }}"
-    branch: nightlies
+# - repo: "{{ url_git_bundle }}"
+#   dest: "{{ dir_git_bundle }}"
+#   branch: nightlies
 #   branch: "{{ git_branch }}"
+#   key_file: "{{ keyfile }}"
+  - repo: "{{ url_git_deploy }}"
+    dest: "{{ dir_git_deploy }}"
+    branch: nightlies
 #   key_file: "{{ keyfile }}"
   - repo: "{{ url_git_build }}"
     dest: "{{ dir_git_build }}"
@@ -31,16 +50,16 @@ ansiblerepos:
     dest: "{{ dir_git_cloudctl }}"
     branch: "{{ git_branch }}"
 #   key_file: "{{ keyfile }}"
-  - repo: "{{ url_git_deploy }}"
-    dest: "{{ dir_git_deploy }}"
-    branch: "{{ git_branch }}"
-#   key_file: "{{ keyfile }}"
   - repo: "{{ url_git_configure }}"
     dest: "{{ dir_git_configure }}"
     branch: "{{ git_branch }}"
 #   key_file: "{{ keyfile }}"
 
 terraformrepos:
+  - repo: "{{ url_git_tffences }}"
+    dest: "{{ dir_git_tffences }}"
+    branch: master
+#   key_file: "{{ keyfile }}"
   - repo: "{{ url_git_tfcore }}"
     dest: "{{ dir_git_tfcore }}"
     branch: "{{ git_branch }}"

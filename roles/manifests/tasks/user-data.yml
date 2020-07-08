@@ -1,0 +1,18 @@
+####### Ignition User Data
+- name: '{{ ansible_name_module }} role | manifests | template | Stage OpenShift Ignition User-Data JSON'
+  template:
+    src: user-data-ign.json.j2
+    dest: "{{ dir_cluster }}/user-data/{{ item.name }}.json"
+  with_items:
+    - { name: master,    IGNITION_URL: "http://registry.{{ cluster_domain }}/master.ign" }
+    - { name: bootstrap, IGNITION_URL: "http://registry.{{ cluster_domain }}/bootstrap.ign" }
+    - { name: bastion,   USER_AUTH_KEY: "{{ lookup('file',  dir_cluster +  '/.ssh/id_rsa_' + cluster_domain + '.pub' ) }}" }
+
+- name: '{{ ansible_name_module }} role | manifests | template | Stage OpenShift Ignition User-Data B64'
+  template:
+    src: user-data-ign.b64.j2
+    dest: "{{ dir_cluster }}/user-data/{{ item.name }}-json.b64"
+  with_items:
+    - { name: master,    IGNITION_URL: "http://registry.{{ cluster_domain }}/master.ign" }
+    - { name: bootstrap, IGNITION_URL: "http://registry.{{ cluster_domain }}/bootstrap.ign" }
+    - { name: bastion,   USER_AUTH_KEY: "{{ lookup('file',  dir_cluster +  '/.ssh/id_rsa_' + cluster_domain + '.pub' ) }}" }
