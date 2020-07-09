@@ -1,13 +1,7 @@
 #!/bin/bash
-#set -ex
 ################################################################################
 # ContainerOne Konductor IaC Prep & Init                    # User Helper Script
-################################################################################
 # Working Variables
-k9NameVpc=""
-k9NameDomain=""
-k9NameCluster=""
-k9ClusterDomain=""
 k9DirDeploy="${HOME}/deploy"
 runAnsibleCmd="./site.yml"
 ################################################################################
@@ -46,8 +40,7 @@ echo
 ################################################################################
 # Stage ansible variables
 run_stage_deploy_variables () {
-run_log 0 "Staging Ansible ${k9DirDeploy}/ansible/k9.yml variables file"
-# TODO: protect secrets with: "ansible-vault"
+echo && run_log 0 "Staging Ansible ${k9DirDeploy}/ansible/cluster-vars.yml variables file"
 cat <<EOF | tee ${k9DirDeploy}/ansible/cluster-vars.yml
 ---
 target_environment: "fences"
@@ -58,30 +51,6 @@ name_cluster_vpc: "${k9NameVpc}"
 name_domain: "${k9NameDomain}"
 EOF
 echo
-}
-
-################################################################################
-# Stage UserData
-write_user_data_json () {
-clear && echo
-
-mkdir -p ${k9DirCluster}/user-data
-run_log 0 "Generating RHCOS Bastion node user-data json"
-cat <<EOF > ${k9DirCluster}/user-data/bastion.json; echo
-{"ignition":{"config":{},"security":{"tls":{}},"timeouts":{},"version":"2.2.0"},"networkd":{},"passwd":{"users":[{"name":"core","sshAuthorizedKeys":["$(cat ${k9DirDeploy}/secrets/ssh/id_rsa_cluster_root.pub)"]}]},"storage":{},"systemd":{}}
-EOF
-
-run_log 0 "Generating RHCOS Bootstrap node user-data json"
-cat <<EOF > ${k9DirCluster}/user-data/bootstrap.json; echo
-{"ignition":{"config":{"append":[{"source":"http://registry.${k9ClusterDomain}:8080/bootstrap.ign","verification":{}}]},"security":{},"timeouts":{},"version":"2.2.0"},"networkd":{},"passwd":{},"storage":{},"systemd":{}}
-EOF
-
-run_log 0 "Generating RHCOS Master node(s) user-data json"
-cat <<EOF > ${k9DirCluster}/user-data/master.json; echo
-{"ignition":{"config":{"append":[{"source":"http://registry.${k9ClusterDomain}:8080/master.ign","verification":{}}]},"security":{},"timeouts":{},"version":"2.2.0"},"networkd":{},"passwd":{},"storage":{},"systemd":{}}
-EOF
-
-clear
 }
 
 ################################################################################
@@ -112,9 +81,6 @@ EOF
 ################################################################################
 # One Time Artifact Environment Staging
 run_init_stage () {
-# Create directory structure
-#mkdir -p ${k9DirDeploy}/{log,auth,ssl,data,registry,user-data,mirror,repos,ansible,terraform,secrets,bak/openshift/,bak/.docker,.docker,.ssh,.aws}
-
 # Stage environment variables
 mkdir -p ${k9DirDeploy}/config
 cat <<EOF > ${k9DirDeploy}/config/environment
@@ -126,7 +92,6 @@ export k9NameCluster="${k9NameCluster}"
 export k9ClusterDomain="${k9ClusterDomain}"
 export k9DirCluster="${k9DirCluster}"
 EOF
-
 }
 
 ################################################################################
@@ -195,7 +160,6 @@ run_init_usr_prompt () {
     prompt_k9NameVpc
     prompt_verify
   }
-
 sub_run
 }
 
@@ -208,29 +172,23 @@ run_log 0 "
     This will walk you through your OpenShift on AWS prerequisites:
 
       1. AWS Admin Credentials:
-
-           GovCloud Credentials:
-             @ https://console.amazonaws-us-gov.com/iam/home#/security_credentials
-           Commercial Credentials:
-             @ https://console.aws.amazon.com/iam/home#/security_credentials
-
+             GovCloud Credentials:
+               @ https://console.amazonaws-us-gov.com/iam/home#/security_credentials
+             Commercial Credentials:
+               @ https://console.aws.amazon.com/iam/home#/security_credentials
 
       2. A Red Hat Developer or Subscription account:
-
-           Developer Sign up          @ https://developers.redhat.com/register/
-           Commercial Register/Login  @ https://access.redhat.com
-
+             Developer Sign up          @ https://developers.redhat.com/register/
+             Commercial Register/Login  @ https://access.redhat.com
 
       3. Quay Pull Secret from the UPI OpenShift Cluster Manager Portal:
-            @ https://cloud.redhat.com/openshift/install/metal/user-provisioned
-
+               @ https://cloud.redhat.com/openshift/install/metal/user-provisioned
 "
   while true; do
     read -p "    Are you ready to continue? (Yes/No): " verify
     case ${verify} in
       [Yy]* ) run_log 0 "Continuing ..." ;
-	      break
-	      ;;
+	      break ;;
       [Nn]* ) run_log 1 "User Rejected.  Terminating ..." ;;
           * ) run_log 3 "Please answer Yes or No"         ;;
     esac
@@ -243,9 +201,7 @@ run () {
   run_init_usr_prompt
   run_init_stage
   usr_prompt_aws_keys 
-  write_user_data_json
   run_stage_deploy_variables
   run_ansible_playbook_bundle
 }
-
 run

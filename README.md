@@ -1,19 +1,10 @@
 ## 1. Create base ArtifactBundle asset images & directories
 ```
-mkdir -p ${HOME}/TRNO
+podman exec -it cloudctl-one connect
 ```
 ## 2. Launch ContainerOne Point of Origin Container
 ```
-sudo podman run -dq -h one --name one --privileged --volume ${HOME}/TRNO:/root/deploy:z docker.io/containercraft/one:nightlies
-```
-## 3. Exec into ContainerOne
-```
-sudo podman exec -it one connect
-```
-## 4.\* Setup environment
-Run the `p1` initial artifact setup walkthrough:
-```
-p1
+ p1
 ```
 # Demo:
   - Building the bundle    

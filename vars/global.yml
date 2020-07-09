@@ -44,7 +44,7 @@ remote_home: "{{ ansible_env.HOME }}"
 registry_auth_file: "{{ dir_secrets }}/docker/config.json }}"
 
 # SSH Keys
-sshkeys_pub_file: "{{ dir_secrets }}/ssh/id_rsa.pub"
-sshkeys_priv_file: "{{ dir_secrets }}/ssh/id_rsa"
-sshkeys_pub_string: "{{ lookup('file', '{{ sshkeys_pub_file }}') }}"
+sshkeys_priv_file: "{{ dir_secrets }}/ssh/id_rsa_cluster_deploy"
 sshkeys_priv_string: "{{ lookup('file', '{{ sshkeys_priv_file }}') }}"
+sshkeys_pub_file: "{{ dir_secrets }}/ssh/id_rsa_cluster_deploy.pub"
+sshkeys_pub_string: "{{ lookup('file', '{{ sshkeys_pub_file }}') }}"

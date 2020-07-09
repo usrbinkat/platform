@@ -1,8 +1,8 @@
 #!/usr/local/bin/ansible-playbook --inventory=inventory
-- name: 'RedHat | TRNO | bundle | ignition' 
-  hosts: containerone
+- name: 'RedHat | Konductor | ignition' 
+  hosts: local
   vars_files:
-    - '../p1.yml'
+    - '../cluster-vars.yml'
     - 'vars/{{ target_environment }}.yml'
     - 'vars/global.yml'
   vars:

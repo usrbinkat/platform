@@ -7,7 +7,7 @@ cluster_name = "{{ cluster_name }}"
 cluster_domain = "{{ cluster_domain }}"
 name_cluster_vpc = "{{ name_cluster_vpc }}"
 iam_instance_profile = "{{ name_cluster_vpc }}-master-profile"
-bootstrap_ign_path = "{{ dir_artifacts }}/user-data/bootstrap.json"
+bootstrap_ign_path = "{{ dir_deploy }}/config/user-data/bootstrap.json"
 default_tags = {  }
 external_management_access = "{{ public_ssh_access_enabled }}"
 
