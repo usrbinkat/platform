@@ -3,4 +3,4 @@
   copy:
     src: "{{ dir_deploy }}/cluster/ignition/"
     dest: "{{ dir_deploy }}/nginx/"
-    mode: 0777
+    mode: 0755
