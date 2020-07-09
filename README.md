@@ -1,8 +1,22 @@
-## 1. Create base ArtifactBundle asset images & directories
+# Requirements:
+This codebase presumes a koffer bundle present in the `/tmp/` directory.
+    
+### 1. Aquire root & unpack tarball
 ```
-podman exec -it cloudctl-one connect
+sudo -i
 ```
-## 2. Launch ContainerOne Point of Origin Container
+```
+tar -xv -C /root -f /tmp/koffer-bundle.*.tar
+```
+### 2. Run CloudCtl stand up script
+```
+ ./start-cloudctl.sh
+```
+### 3. Exec into CloudCtl
+```
+ podman exec -it cloudctl-one connect
+```
+### 4. Run p1 init script
 ```
  p1
 ```
