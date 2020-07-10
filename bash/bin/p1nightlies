@@ -1,56 +1,86 @@
 #!/bin/bash
-################################################################################
-# ContainerOne Konductor IaC Prep & Init                    # User Helper Script
-# Working Variables
-k9DirDeploy="${HOME}/deploy"
-runAnsibleCmd="./site.yml"
+# Konductor.sh
+#   Author: kmorgan@redhat.com
+# About:
+#   Build and start CloudCtl AirGap OpenShift Deployment Pod from a Koffer Bundle
 ################################################################################
 # Base Logging
 run_log () {
   if   [[ $1 == 0 ]]; then
     echo "   $2"
   elif [[ $1 == 1 ]]; then
-    echo "   $2"
+    echo "   FATAL: $2"
+    echo "Aborting!"
     exit 1
   fi
 }
 
 ################################################################################
-# Option Run Ansible Playbook
-run_ansible_playbook_bundle () {
-while true; do
-  read -rp "    >> Would you like to deploy your cluster now? (yes/no): " yn
-    case $yn in
-      [Yy]* ) echo ;
-	      run_log 0 "Executing ansible playbook ${runAnsibleCmd}" ; 
-              clear;
-              cd ~/deploy/ansible/deploy; 
-              ${runAnsibleCmd}; 
-              break
-              ;;
-      [Nn]* ) run_log 0 " >> Exiting now, thank you!" ;
-	      break
-              ;;
-          * ) echo "$SEP_2 Please answer yes or no." ;;
-    esac
-  break
-done
-echo
-}
+# Verify Bundle Integrity & Launch
+if [[ ! -d ./deploy ]]; then
+  run_log 0 "Verifying SHA256SUM: ArtifactsBundle.tar.xz"
+  sha256sum --check ArtifactsBundle.tar.xz.sha256 \
+      && tar -xv -C /root -f ArtifactsBundle.tar.xz \
+      && rm -rf ArtifactsBundle.tar.xz ArtifactsBundle.tar.xz.sha256 \
+      || run_log 1 "SHA Verify Failed!"
+fi
+
+################################################################################
+# Konductor Initialization & Prerequisites
+################################################################################
+# Working Variables
+k9DirDeploy="${HOME}/deploy"
+varVerOpenshift="$(cat /deploy/nginx/release.txt)"
+
 ################################################################################
 # Stage ansible variables
 run_stage_deploy_variables () {
 echo && run_log 0 "Staging Ansible ${k9DirDeploy}/ansible/cluster-vars.yml variables file"
 cat <<EOF | tee ${k9DirDeploy}/ansible/cluster-vars.yml
 ---
-target_environment: "fences"
 version_openshift: "${varVerOpenshift}"
+target_environment: "${k9TargetEnvironment}"
+name_cluster_vpc: "${k9NameVpc}"
 cluster_domain: "${k9ClusterDomain}"
 cluster_name: "${k9NameCluster}"
-name_cluster_vpc: "${k9NameVpc}"
 name_domain: "${k9NameDomain}"
 EOF
+cat <<EOF | tee ${k9DirDeploy}/release.txt
+${varVerOpenshift}
+EOF
 echo
+}
+
+################################################################################
+# One Time Artifact Environment Staging
+run_init_stage () {
+# Stage environment variables
+mkdir -p ${k9DirDeploy}/config
+cat <<EOF > ${k9DirDeploy}/config/environment
+export k9DirDeploy="\${HOME}/deploy"
+export versOCP="${versOCP}"
+export k9NameVpc="${k9NameVpc}"
+export k9NameDomain="${k9NameDomain}"
+export k9NameCluster="${k9NameCluster}"
+export k9ClusterDomain="${k9ClusterDomain}"
+export k9DirCluster="${k9DirCluster}"
+EOF
+}
+
+################################################################################
+# Write Self Signed Certificate & Key
+run_log 0 "Staging optional registry node self signed certificates"
+write_self_signed_cert () {
+openssl req \
+  -x509 \
+  -nodes \
+  -sha256 \
+  -days   3650 \
+  -newkey rsa:4096 \
+  -subj   "/CN=${p1ClusterDomain}" \
+  -out    /root/deploy/secrets/registry/ssl/registry.crt  \
+  -keyout /root/deploy/secrets/registry/ssl/registry.key  \
+  -addext "subjectAltName=DNS:registry.${p1ClusterDomain},DNS:cloudctl,DNS:registry,DNS:localhos,IP:10.88.0.1,IP:127.0.0.1" 2>&1 1>/dev/null
 }
 
 ################################################################################
@@ -80,31 +110,16 @@ EOF
 
 ################################################################################
 # One Time Artifact Environment Staging
-run_init_stage () {
-# Stage environment variables
-mkdir -p ${k9DirDeploy}/config
-cat <<EOF > ${k9DirDeploy}/config/environment
-export k9DirDeploy="\${HOME}/deploy"
-export versOCP="${versOCP}"
-export k9NameVpc="${k9NameVpc}"
-export k9NameDomain="${k9NameDomain}"
-export k9NameCluster="${k9NameCluster}"
-export k9ClusterDomain="${k9ClusterDomain}"
-export k9DirCluster="${k9DirCluster}"
-EOF
-}
-
-################################################################################
-# One Time Artifact Environment Staging
 run_init_usr_prompt () {
   # Verify Information
   prompt_verify () {
     echo " 
     Artifact Environment Variables:
-      VPC Name:       ${k9NameVpc}
-      Cluster Name:   ${k9NameCluster}
-      Base Domain:    ${k9NameDomain}
-      Cluster Domain: ${k9ClusterDomain}
+      Target Environment: ${k9TargetEnvironment}
+      VPC Name:           ${k9NameVpc}
+      Cluster Domain:     ${k9ClusterDomain}
+      Cluster Name:       ${k9NameCluster}
+      Base Domain:        ${k9NameDomain}
     "
 
   while true; do
@@ -152,9 +167,21 @@ run_init_usr_prompt () {
   read -p '    Base Domain : ' k9NameDomain ;
   }
 
+  # Prompt User for Target Environment
+  prompt_k9TargetEnvironment () {
+  echo "
+    Please Declare your target environment from the supported list:
+    Supported Environments:
+      - fences
+      - govcloud
+"
+  read -p '    Target Environment: ' k9TargetEnvironment;
+  }
+
   # Call subroutines
   sub_run () {
     clear && echo
+    prompt_k9TargetEnvironment
     prompt_k9NameDomain
     prompt_k9NameCluster
     prompt_k9NameVpc
@@ -192,12 +219,112 @@ run_log 0 "
 }
 
 # Function call order
-run () {
+run_discover () {
   run_info
   run_init_usr_prompt
   run_init_stage
   usr_prompt_aws_keys 
+  write_self_signed_cert 
   run_stage_deploy_variables
-  run_ansible_playbook_bundle
+}
+run_discover
+
+
+################################################################################
+# CloudCtl Pod Startup
+################################################################################
+
+runUser="$USER"
+p1DirImages=${HOME}/deploy/images
+
+sudo chown -R ${runUser}:${runUser} ${HOME}/deploy
+sudo chmod -R 0777 ${HOME}/deploy/nginx
+################################################################################
+# Option Run Ansible Playbook
+run_ansible_playbook_bundle () {
+while true; do
+  read -rp "    >> Would you like to deploy your cluster now? (yes/no): " yn
+    case $yn in
+      [Yy]* ) echo ;
+	      run_log 0 "Executing ansible playbook ${runAnsibleCmd}" ; 
+              clear;
+              podman exec -it one /bin/bash -c 'cd /root/deploy/ansible/deploy ; ./site.yml' ;
+              break
+              ;;
+      [Nn]* ) run_log 0 " >> Exiting now, thank you!" ;
+	      break
+              ;;
+          * ) echo "$SEP_2 Please answer yes or no." ;;
+    esac
+  break
+done
+echo
+}
+
+
+run_clean () {
+  for container in $(podman ps | awk '/one|nginx|registry|pause|busybox/{print $3}' 2>/dev/null); do
+    podman rm --force $container
+  done
+  for pod in $(podman pod ps | awk '/cloudctl/{print $1}' 2>/dev/null); do
+    podman pod rm --force $pod
+  done
+  for image in $(podman images | awk '/one|nginx|registry|pause|busybox/{print $3}' 2>/dev/null); do
+    podman rmi --force $image
+  done
+}
+
+load_images () {
+  for image in $(ls ${p1DirImages}/*.tar); do
+    echo "  >> Loading Image: ${image}"
+    sudo podman load -i ${image}
+  done
+  echo "  >> Cloudctl Images Loaded Successfully."
+}
+
+load_mirror_certificate () {
+# echo "  >> Loading registry certificate to host."
+cp /root/deploy/secrets/registry/ssl/registry.crt \
+    /etc/pki/ca-trust/source/anchors/registry.crt \
+  && sudo update-ca-trust
+}
+
+run_pod () {
+  echo "  >> Starting CloudCtl Pod."
+  podman play kube ./cloudctl.yml
+}
+
+run_core () {
+  run_clean
+  load_images
+  load_mirror_certificate
+  run_pod
+}
+
+test_core () {
+  
+  echo "  >> Testing NGINX Ignition Service"
+  ignTest=$(curl -s http://localhost:8080/bootstrap.ign 2>&1 1>/dev/null ; echo $?)
+  [[ ${ignTest} == '0' ]] \
+      && echo "  >> NGINX Ignition Delivery Service Failed!" \
+      || echo "  >> NGINX Ignition Delivery Service Online."
+
+  echo "  >> Testing Docker Registry:2 Service"
+  sleep 3
+  ignTest=$(curl -u cloudctl:cloudctl -k https://localhost:5000/v2/_catalog 2>&1 1>/dev/null ; echo $?)
+  [[ ${ignTest} == '0' ]] \
+      && echo "  >> Registry Service Failed!" \
+      || echo "  >> Registry Service Online. Catalog: $(curl -s -u cloudctl:cloudctl -k https://localhost:5000/v2/_catalog)"
+  echo
+  echo "  >> List Pods & Containers"
+  podman pod ps
+  podman ps --all
+  echo
+}
+
+run () {
+run_core
+test_core
+run_ansible_playbook_bundle
 }
 run
