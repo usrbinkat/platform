@@ -8,17 +8,9 @@ sudo -i
 ```
 tar -xv -C /root -f /tmp/koffer-bundle.*.tar
 ```
-### 2. Run CloudCtl stand up script
+### 2. Run Konductor CloudCtl Pod stand up script
 ```
  ./start-cloudctl.sh
-```
-### 3. Exec into CloudCtl
-```
- podman exec -it cloudctl-one connect
-```
-### 4. Run p1 init script
-```
- p1
 ```
 # Demo:
   - Building the bundle    
