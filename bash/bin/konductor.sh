@@ -60,12 +60,15 @@ run_stage_deploy_variables () {
 echo && run_log 0 "Staging Ansible ${k9DirDeploy}/ansible/cluster-vars.yml variables file"
 cat <<EOF | tee ${k9DirDeploy}/ansible/cluster-vars.yml
 ---
-target_environment: "fences"
 version_openshift: "${varVerOpenshift}"
+target_environment: "${k9TargetEnvironment}"
+name_cluster_vpc: "${k9NameVpc}"
 cluster_domain: "${k9ClusterDomain}"
 cluster_name: "${k9NameCluster}"
-name_cluster_vpc: "${k9NameVpc}"
 name_domain: "${k9NameDomain}"
+EOF
+cat <<EOF | tee ${k9DirDeploy}/release.txt
+${varVerOpenshift}
 EOF
 echo
 }
@@ -134,10 +137,11 @@ run_init_usr_prompt () {
   prompt_verify () {
     echo " 
     Artifact Environment Variables:
-      VPC Name:       ${k9NameVpc}
-      Cluster Name:   ${k9NameCluster}
-      Base Domain:    ${k9NameDomain}
-      Cluster Domain: ${k9ClusterDomain}
+      Target Environment: ${k9TargetEnvironment}
+      VPC Name:           ${k9NameVpc}
+      Cluster Domain:     ${k9ClusterDomain}
+      Cluster Name:       ${k9NameCluster}
+      Base Domain:        ${k9NameDomain}
     "
 
   while true; do
