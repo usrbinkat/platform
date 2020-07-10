@@ -247,7 +247,7 @@ while true; do
       [Yy]* ) echo ;
 	      run_log 0 "Executing ansible playbook ${runAnsibleCmd}" ; 
               clear;
-              podman exec -it one /bin/bash -c 'cd /root/deploy/ansible/deploy ; ./root/deploy/ansible/deploy/site.yml' ;
+              podman exec -it one /bin/bash -c 'cd /root/deploy/ansible/deploy ; ./site.yml' ;
               break
               ;;
       [Nn]* ) run_log 0 " >> Exiting now, thank you!" ;
