@@ -43,7 +43,6 @@
 
     - name: '{{ ansible_name_module }} role | manifests | template | Stage OpenShift Ignition User-Data B64'
       template:
-        src: user-data-ign.b64.j2
         src: "{{ dir_deploy_templates }}/user-data/user-data-ign.b64.j2"
         dest: "{{ dir_deploy }}/config/user-data/{{ item.name }}-json.b64"
       with_items:
