@@ -171,18 +171,14 @@ run_log 0 "
     Welcome to the ContainerOne OpenShift Artifact Prep Utility.
     This will walk you through your OpenShift on AWS prerequisites:
 
-      1. AWS Admin Credentials:
-             GovCloud Credentials:
-               @ https://console.amazonaws-us-gov.com/iam/home#/security_credentials
-             Commercial Credentials:
-               @ https://console.aws.amazon.com/iam/home#/security_credentials
+    External Requirements:
 
-      2. A Red Hat Developer or Subscription account:
-             Developer Sign up          @ https://developers.redhat.com/register/
-             Commercial Register/Login  @ https://access.redhat.com
+      AWS Admin Credentials:
+          GovCloud Credentials:
+            @ https://console.amazonaws-us-gov.com/iam/home#/security_credentials
+          Commercial Credentials:
+            @ https://console.aws.amazon.com/iam/home#/security_credentials
 
-      3. Quay Pull Secret from the UPI OpenShift Cluster Manager Portal:
-               @ https://cloud.redhat.com/openshift/install/metal/user-provisioned
 "
   while true; do
     read -p "    Are you ready to continue? (Yes/No): " verify
