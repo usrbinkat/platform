@@ -238,7 +238,6 @@ runUser="$USER"
 p1DirImages=${HOME}/deploy/images
 
 sudo chown -R ${runUser}:${runUser} ${HOME}/deploy
-sudo chmod -R 0777 ${HOME}/deploy/nginx
 ################################################################################
 # Option Run Ansible Playbook
 run_ansible_playbook_bundle () {
@@ -326,5 +325,6 @@ run () {
 run_core
 test_core
 run_ansible_playbook_bundle
+sudo chmod -R 0777 ${HOME}/deploy/nginx
 }
 run
