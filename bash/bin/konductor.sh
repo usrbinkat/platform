@@ -30,29 +30,6 @@ fi
 ################################################################################
 # Working Variables
 k9DirDeploy="${HOME}/deploy"
-runAnsibleCmd="podman exec -it one /bin/bash -c ' cd /root/deploy/ansible/deploy && ./root/deploy/ansible/deploy/site.yml'"
-
-################################################################################
-# Option Run Ansible Playbook
-run_ansible_playbook_bundle () {
-while true; do
-  read -rp "    >> Would you like to deploy your cluster now? (yes/no): " yn
-    case $yn in
-      [Yy]* ) echo ;
-	      run_log 0 "Executing ansible playbook ${runAnsibleCmd}" ; 
-              clear;
-              ${runAnsibleCmd}; 
-              break
-              ;;
-      [Nn]* ) run_log 0 " >> Exiting now, thank you!" ;
-	      break
-              ;;
-          * ) echo "$SEP_2 Please answer yes or no." ;;
-    esac
-  break
-done
-echo
-}
 
 ################################################################################
 # Stage ansible variables
@@ -248,7 +225,6 @@ run_discover () {
   usr_prompt_aws_keys 
   write_self_signed_cert 
   run_stage_deploy_variables
-  run_ansible_playbook_bundle
 }
 run_discover
 
@@ -259,7 +235,32 @@ run_discover
 
 runUser="$USER"
 p1DirImages=${HOME}/deploy/images
+runAnsibleCmd="podman exec -it one /bin/bash -c ' cd /root/deploy/ansible/deploy && ./root/deploy/ansible/deploy/site.yml'"
+
 sudo chown -R ${runUser}:${runUser} ${HOME}/deploy
+sudo chmod -R 0777 ${HOME}/deploy/nginx
+################################################################################
+# Option Run Ansible Playbook
+run_ansible_playbook_bundle () {
+while true; do
+  read -rp "    >> Would you like to deploy your cluster now? (yes/no): " yn
+    case $yn in
+      [Yy]* ) echo ;
+	      run_log 0 "Executing ansible playbook ${runAnsibleCmd}" ; 
+              clear;
+              ${runAnsibleCmd}; 
+              break
+              ;;
+      [Nn]* ) run_log 0 " >> Exiting now, thank you!" ;
+	      break
+              ;;
+          * ) echo "$SEP_2 Please answer yes or no." ;;
+    esac
+  break
+done
+echo
+}
+
 
 run_clean () {
   for container in $(podman ps | awk '/one|nginx|registry|pause|busybox/{print $3}' 2>/dev/null); do
@@ -321,5 +322,9 @@ test_core () {
   echo
 }
 
+run () {
 run_core
 test_core
+run_ansible_playbook_bundle
+}
+run
