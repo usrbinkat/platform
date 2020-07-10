@@ -30,6 +30,7 @@ fi
 ################################################################################
 # Working Variables
 k9DirDeploy="${HOME}/deploy"
+varVerOpenshift="$(cat /deploy/nginx/release.txt)"
 
 ################################################################################
 # Stage ansible variables
