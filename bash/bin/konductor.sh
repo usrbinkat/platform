@@ -235,7 +235,6 @@ run_discover
 
 runUser="$USER"
 p1DirImages=${HOME}/deploy/images
-runAnsibleCmd="podman exec -it one /bin/bash -c ' cd /root/deploy/ansible/deploy && ./root/deploy/ansible/deploy/site.yml'"
 
 sudo chown -R ${runUser}:${runUser} ${HOME}/deploy
 sudo chmod -R 0777 ${HOME}/deploy/nginx
@@ -248,7 +247,7 @@ while true; do
       [Yy]* ) echo ;
 	      run_log 0 "Executing ansible playbook ${runAnsibleCmd}" ; 
               clear;
-              ${runAnsibleCmd}; 
+              podman exec -it one /bin/bash -c 'cd /root/deploy/ansible/deploy ; ./root/deploy/ansible/deploy/site.yml' ;
               break
               ;;
       [Nn]* ) run_log 0 " >> Exiting now, thank you!" ;
