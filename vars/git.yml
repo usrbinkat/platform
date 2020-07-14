@@ -35,12 +35,12 @@ dir_git_tfbootstrap: "{{ dir_ansible }}/bootstrap"
 ansiblerepos:
 # - repo: "{{ url_git_bundle }}"
 #   dest: "{{ dir_git_bundle }}"
-#   branch: nightlies
+#   branch: latest
 #   branch: "{{ git_branch }}"
 #   key_file: "{{ keyfile }}"
   - repo: "{{ url_git_deploy }}"
     dest: "{{ dir_git_deploy }}"
-    branch: nightlies
+    branch: latest
 #   key_file: "{{ keyfile }}"
   - repo: "{{ url_git_build }}"
     dest: "{{ dir_git_build }}"
