@@ -53,7 +53,7 @@ platform:
   {{ cloud_provider }}:
     amiID: {{ cloud_instance_ami }}
     region: {{ cloud_region }}
-pullSecret: '{{ lookup('file', '{{ dir_artifacts }}/.docker/mirror.json') | regex_replace("\'", "\"") }}'
+pullSecret: '{{ lookup('file', '{{ dir_secrets }}/docker/config.json') | regex_replace("\'", "\"") }}'
 sshKey: '{{ sshkeys_pub_string }}'
 publish: {{ openshift_install_publish }}
 fips: {{ cloud_instance_fips }}
