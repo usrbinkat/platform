@@ -4,24 +4,6 @@ additionalTrustBundle: |
 baseDomain: {{ name_domain }}
 imageContentSources:
 - mirrors:
-  - registry.{{ cluster_domain }}:5000
-  source: registry.dsop.io
-- mirrors:
-  - registry.{{ cluster_domain }}:5000
-  source: k8s.gcr.io
-- mirrors:
-  - registry.{{ cluster_domain }}:5000
-  source: registry.redhat.io
-- mirrors:
-  - registry.{{ cluster_domain }}:5000
-  source: registry.access.redhat.com
-- mirrors:
-  - registry.{{ cluster_domain }}:5000
-  source: docker.io
-- mirrors:
-  - registry.{{ cluster_domain }}:5000
-  source: quay.io
-- mirrors:
   - registry.{{ cluster_domain }}:5000/ocp-{{ version_openshift }}
   source: quay.io/openshift-release-dev/ocp-release
 - mirrors:
