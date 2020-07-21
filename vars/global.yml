@@ -19,7 +19,6 @@ image_mirror_utility: "oc"
 # Bash ENV Lookups
 local_home: "{{ lookup('env', 'HOME') }}"
 local_user: "{{ lookup('env', 'USER') }}"
-version_openshift: "{{ lookup('env', 'varVerOpenshift') }}"
 
 # Ansible Playbook Run Variables
 name_vendor: "RedHat"
