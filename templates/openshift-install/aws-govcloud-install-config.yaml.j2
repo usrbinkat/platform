@@ -4,9 +4,6 @@ additionalTrustBundle: |
 baseDomain: {{ name_domain }}
 imageContentSources:
 - mirrors:
-  - registry.{{ cluster_domain }}:5000/origin/release
-  source: registry.svc.ci.openshift.org/origin/release
-- mirrors:
   - registry.{{ cluster_domain }}:5000/openshift-release-dev
   source: quay.io/openshift-release-dev/ocp-release
 - mirrors:
