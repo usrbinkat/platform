@@ -14,4 +14,3 @@ tar -xv -C /root -f /tmp/koffer-bundle.*.tar
 ```
 # Demo:
   - Building the bundle    
-![bundle](./web/bundle.svg)
