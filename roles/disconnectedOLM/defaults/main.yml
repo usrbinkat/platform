@@ -1,0 +1,3 @@
+module: disconnectedOLM
+ansible_name_module: "{{ ansible_name }} | {{ module }}"
+kubeconfig_path: /root/deploy/bak/auth/kubeconfig

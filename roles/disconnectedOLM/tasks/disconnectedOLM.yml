@@ -1,0 +1,27 @@
+---
+- name: '{{ ansible_name_module }} | find:files | find files in offline operator directory'
+  find:
+    paths: /root/deploy/mirror/operators/redhat
+    file_type: file
+  register: files
+
+- name: '{[ ansible_name_module }} | replace:files | replace curated registry with disconnected registry'
+  replace:
+    path: "{{ item }}"
+    regexp: 'localhost'
+    replace: "{{ registry_name }}"
+  loop:
+    - '{{ files.files }}'
+  when: files.examined >= 1
+    
+
+- name: '{{ ansible_name_module | manifest:apply | turn off default operator sources'
+  k8s:
+    state: present
+    kubeconfig: "{{ kubeconfig_path }}"
+    definition:
+      apiVersion: config.openshift.io/v1
+      kind: OperatorHub
+      spec:
+        disableAllDefaultSources: true
+ 
